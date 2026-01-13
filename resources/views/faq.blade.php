@@ -1,0 +1,93 @@
+@extends('layouts.app')
+
+@section('title', 'FAQ - Washoku Japanese Restaurant')
+
+@section('content')
+
+<section class="bg-gradient-to-br from-red-700 via-red-600 to-red-800 py-20 relative overflow-hidden">
+    
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+    
+    <div class="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center">
+            <div class="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
+                <span class="text-white/90 text-sm font-semibold">❓ Help Center</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold font-serif text-white mb-6">FAQ</h1>
+            <p class="text-white/90 text-xl max-w-2xl mx-auto">Frequently Asked Questions</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="container mx-auto px-4 py-24">
+    <div class="max-w-3xl mx-auto space-y-6">
+        @php
+        $faqs = [
+            [
+                'question' => 'What are your operating hours?',
+                'answer' => 'We are open daily from 10:00 AM to 10:00 PM. Last order is at 9:30 PM.'
+            ],
+            [
+                'question' => 'Do you offer delivery?',
+                'answer' => 'Yes! We offer delivery through our website. Simply add items to your cart and proceed to checkout. Delivery is available within Metro Manila.'
+            ],
+            [
+                'question' => 'Can I customize my bento box?',
+                'answer' => 'Absolutely! Our Bento Builder allows you to create your own custom bento box. Choose your main dish and side dishes to create your perfect meal.'
+            ],
+            [
+                'question' => 'Do you cater for events?',
+                'answer' => 'Yes, we offer catering services for events of all sizes. Please contact us at least 3 days in advance for catering orders.'
+            ],
+            [
+                'question' => 'Are there vegetarian options available?',
+                'answer' => 'Yes, we have a variety of vegetarian options including vegetable tempura, edamame, miso soup, and vegetable sushi rolls.'
+            ],
+            [
+                'question' => 'What payment methods do you accept?',
+                'answer' => 'We accept cash, credit/debit cards (Visa, Mastercard), GCash, Maya, and bank transfers.'
+            ],
+            [
+                'question' => 'How do I track my order?',
+                'answer' => 'Once your order is confirmed, you can track it through your account dashboard under "My Orders".'
+            ],
+            [
+                'question' => 'Can I cancel or modify my order?',
+                'answer' => 'Orders can be cancelled or modified within 5 minutes of placing them. After that, please contact our customer service for assistance.'
+            ]
+        ];
+        @endphp
+        
+        @foreach($faqs as $index => $faq)
+        <div x-data="{ open: false }" class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-transparent hover:border-red-200 transition-all">
+            <button @click="open = !open" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4">
+                <span class="font-bold text-lg text-primary-dark">{{ $faq['question'] }}</span>
+                <svg class="w-6 h-6 text-red-600 transform transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <div x-show="open" x-collapse class="px-6 pb-5">
+                <p class="text-gray-600 leading-relaxed">{{ $faq['answer'] }}</p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    
+    <div class="text-center mt-16">
+        <p class="text-gray-600 mb-4">Still have questions?</p>
+        <a href="/contact" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+            <span>Contact Us</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+        </a>
+    </div>
+</section>
+
+@endsection
