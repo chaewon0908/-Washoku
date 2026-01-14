@@ -257,11 +257,60 @@
                 ['id' => 1, 'name' => 'Teriyaki Chicken Bento w/ Miso Soup', 'price' => 249, 'image' => 'https://imgs.search.brave.com/Cvb7g7a0VAcBfUEp0dI_m6H4Q3XgyCbH6C0piHnGQjY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jZG4udHJpcGFk/dmlzb3IuY29tL21l/ZGlhL3Bob3RvLW8v/MTEvZmEvMzIvM2Mv/Y2hpY2tlbi10ZXJp/eWFraS1zZXQuanBn', 'badge' => 'Popular', 'rating' => 4.9],
                 ['id' => 2, 'name' => 'Salmon Sashimi Set w/ Rice & Salad', 'price' => 389, 'image' => 'https://images.pexels.com/photos/1052189/pexels-photo-1052189.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop', 'badge' => 'Fresh', 'rating' => 5.0],
                 ['id' => 3, 'name' => 'Tonkatsu Pork Cutlet w/ Curry Rice', 'price' => 299, 'image' => 'https://imgs.search.brave.com/DFfVbZCzKExcxxXIIoBdkrSYEZQi2MUiLk78XbVBUqY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2l0Y2hlbnNhbmN0/dWFyeS5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMTUvMTAv/a2F0c3Vkb24tUG9y/ay10YWxsMS53ZWJw', 'badge' => 'Chef Special', 'rating' => 4.8],
-                ['id' => 4, 'name' => 'Custom Bento Box (4 compartments)', 'price' => 329, 'image' => 'https://imgs.search.brave.com/KlkAiQ3hziE8jrVJSZAued2Oy283CHc4qpjvJH5KGjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/MjczODI0Ni9waG90/by9yZWQtYW5kLWJs/YWNrLWVtcHR5LWJl/bnRvLWJveC10cmFk/aXRpb25hbC1qYXBh/bmVzZS10cmF5LW1h/ZGUtZm9yLWx1bmNo/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz0tbndGT1MyaXlZ/SW5Henc3QmFQcndU/bWpuT2tHRmFBbUtP/NUhjLU1KUmZRPQ', 'badge' => 'Customizable', 'rating' => 4.9]
+                ['id' => 4, 'name' => 'Custom Bento Box (4 compartments)', 'price' => 399, 'image' => 'https://imgs.search.brave.com/KlkAiQ3hziE8jrVJSZAued2Oy283CHc4qpjvJH5KGjI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/MjczODI0Ni9waG90/by9yZWQtYW5kLWJs/YWNrLWVtcHR5LWJl/bnRvLWJveC10cmFk/aXRpb25hbC1qYXBh/bmVzZS10cmF5LW1h/ZGUtZm9yLWx1bmNo/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz0tbndGT1MyaXlZ/SW5Henc3QmFQcndU/bWpuT2tHRmFBbUtP/NUhjLU1KUmZRPQ', 'badge' => 'Customizable', 'rating' => 4.9, 'link' => '/bento-builder']
             ];
             @endphp
             
             @foreach($bestsellers as $item)
+                @if(isset($item['link']))
+                {{-- Custom Bento Box - Clickable card that redirects to bento builder --}}
+                <a href="{{ $item['link'] }}" class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-transparent hover:border-red-200 block cursor-pointer">
+                    
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
+                        <img src="{{ $item['image'] }}" 
+                             alt="{{ $item['name'] }}"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/600x450/f3f4f6/9ca3af?text=Japanese+Food';">
+                        
+                        <div class="absolute top-4 left-4">
+                            <span class="inline-block bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                                {{ $item['badge'] }}
+                            </span>
+                        </div>
+                        
+                        <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                            <div class="flex items-center gap-1">
+                                <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                <span class="text-xs font-bold text-gray-700">{{ $item['rating'] }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    
+                    
+                    <div class="p-6">
+                        <h3 class="font-bold text-primary-dark mb-4 line-clamp-2 min-h-[3.5rem] text-lg group-hover:text-red-600 transition-colors text-balance">
+                            {{ $item['name'] }}
+                        </h3>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-xs mb-1">Starting at</p>
+                                <span class="text-3xl font-bold text-red-600">₱{{ number_format($item['price'], 0) }}</span>
+                            </div>
+                            <div class="relative bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 group/btn">
+                                <svg class="w-6 h-6 transition-transform group-hover/btn:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                @else
+                {{-- Regular product card with add to cart --}}
                 <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-transparent hover:border-red-200">
                     
                     <div class="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
@@ -309,6 +358,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
     </div>
