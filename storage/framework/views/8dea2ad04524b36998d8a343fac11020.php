@@ -165,22 +165,26 @@
 
                 <!-- Order Now Button -->
                 <?php if(!request()->routeIs('admin.*')): ?>
-                <a href="/cart" 
-                   class="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-red-900/30 hover:shadow-red-600/40 hover:scale-105 group border border-red-500/50"
-                   @cart-updated.window="$store.cart.save()">
-                    <!-- Shimmer Effect -->
-                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                    
-                    <svg class="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                    <span class="relative z-10">Order Now</span>
+                <div class="relative">
+                    <a href="/cart" 
+                       class="relative overflow-hidden bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-red-900/30 hover:shadow-red-600/40 hover:scale-105 group border border-red-500/50"
+                       @cart-updated.window="$store.cart.save()">
+                        <!-- Shimmer Effect -->
+                        <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                        
+                        <svg class="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span class="relative z-10">Order Now</span>
+                    </a>
+                    <!-- Cart Badge - Outside the button for visibility -->
                     <span x-show="$store.cart.count > 0" 
-                          x-text="$store.cart.count"
+                          x-text="$store.cart.count > 99 ? '99+' : $store.cart.count"
                           x-transition
-                          class="absolute -top-2 -right-2 bg-amber-400 text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg ring-2 ring-[#1a1a1a]">
+                          class="absolute -top-2 -right-2 min-w-[24px] h-[24px] px-1.5 bg-amber-400 text-[#1a1a1a] text-xs font-bold rounded-full flex items-center justify-center shadow-lg ring-2 ring-[#1a1a1a]"
+                          style="z-index: 100;">
                     </span>
-                </a>
+                </div>
                 <?php endif; ?>
             </div>
         </div>
