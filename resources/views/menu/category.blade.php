@@ -29,8 +29,7 @@
             @endif
         </div>
 
-        <!-- Category Tabs and Menu Items Grid for Bento Boxes -->
-        @if($category->slug === 'bento-boxes')
+        <!-- Category Tabs and Menu Items Grid -->
         <div x-data="{ 
             activeTab: 'all',
             filterItems(item) {
@@ -40,12 +39,14 @@
                     const name = item.name.toLowerCase();
                     return name.includes('traditional') || name.includes('makunouchi') || 
                            name.includes('tonkatsu') || name.includes('teriyaki') || 
-                           name.includes('sukiyaki') || name.includes('salmon teriyaki');
+                           name.includes('sukiyaki') || name.includes('salmon teriyaki') ||
+                           name.includes('shoyu') || name.includes('classic');
                 }
                 if (this.activeTab === 'character') {
                     const name = item.name.toLowerCase();
                     return name.includes('character') || name.includes('decorative') || 
-                           name.includes('kyaraben') || name.includes('kyara');
+                           name.includes('kyaraben') || name.includes('kyara') ||
+                           name.includes('custom') || name.includes('special');
                 }
                 return true;
             }
@@ -85,7 +86,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     @foreach($items as $item)
                     <div 
-                        @if($category->slug === 'bento-boxes')
                         x-show="filterItems(@js([
                             'name' => $item->name,
                             'is_featured' => $item->is_featured ?? false
@@ -96,7 +96,6 @@
                         x-transition:leave="transition ease-in duration-200"
                         x-transition:leave-start="opacity-100 scale-100"
                         x-transition:leave-end="opacity-0 scale-90"
-                        @endif
                         @click="openItemModal(@js([
                             'id' => $item->id,
                             'name' => $item->name,
@@ -155,70 +154,6 @@
                 </div>
             @endif
         </div>
-        @else
-        <!-- Menu Items Grid (Non-Bento Categories) -->
-        @if($items->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @foreach($items as $item)
-                    <div 
-                        @click="openItemModal(@js([
-                            'id' => $item->id,
-                            'name' => $item->name,
-                            'description' => $item->description,
-                            'price' => $item->price,
-                            'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
-                            'is_featured' => $item->is_featured ?? false,
-                            'is_bestseller' => $item->is_bestseller ?? false,
-                            'is_custom_bento' => false
-                        ]))"
-                        class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer transform hover:-translate-y-1">
-                        <div class="relative overflow-hidden" style="height: 250px;">
-                            <img 
-                                src="{{ $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food' }}" 
-                                alt="{{ $item->name }}"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food';">
-                            @if($item->is_featured)
-                                <div class="absolute top-3 left-3 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
-                                    ⭐ Featured
-                                </div>
-                            @endif
-                            @if($item->is_bestseller)
-                                <div class="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                    🔥 Bestseller
-                                </div>
-                            @endif
-                            <!-- Click hint overlay -->
-                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                <span class="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 px-4 py-2 rounded-full">
-                                    View Details
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-primary-dark mb-2 font-serif">{{ $item->name }}</h3>
-                            @if($item->description)
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ \Illuminate\Support\Str::limit($item->description, 80) }}</p>
-                            @endif
-                            <div class="flex items-center justify-between">
-                                <span class="text-2xl font-bold text-red-600">₱{{ number_format($item->price, 2) }}</span>
-                                <span class="text-sm text-gray-500">Click for details</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <div class="text-center py-16">
-                <div class="text-6xl mb-4">🍽️</div>
-                <h2 class="text-2xl font-bold text-gray-700 mb-2">No items available</h2>
-                <p class="text-gray-600 mb-6">This category doesn't have any menu items yet.</p>
-                <a href="{{ route('menu.index') }}" class="inline-block bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                    Browse Other Categories
-                </a>
-            </div>
-        @endif
-        @endif
     </div>
 
     <!-- Item Details Modal -->
