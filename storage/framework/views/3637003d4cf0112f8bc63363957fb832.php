@@ -31,65 +31,82 @@
             
             <!-- Left Column: Bento Box Builder -->
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                    <div class="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-100">
-                        <h2 class="text-xl font-bold text-gray-800">Your Bento Box</h2>
+                <!-- Realistic Bento Box Container -->
+                <div class="relative flex items-start gap-6">
+                    <!-- Chopsticks Decoration - Left side -->
+                    <div class="hidden md:flex flex-col items-center pt-8">
+                        <div class="flex gap-1.5 transform -rotate-[25deg]">
+                            <div class="w-2 h-44 rounded-full shadow-lg" style="background: linear-gradient(to bottom, #E8D4B8 0%, #D4A574 10%, #8B5A2B 30%, #6B4423 70%, #4A3728 100%);"></div>
+                            <div class="w-2 h-44 rounded-full shadow-lg" style="background: linear-gradient(to bottom, #E8D4B8 0%, #D4A574 10%, #8B5A2B 30%, #6B4423 70%, #4A3728 100%);"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-6 -rotate-90 whitespace-nowrap origin-center">お箸 Chopsticks</p>
                     </div>
                     
-                    <div class="p-4">
-                        <!-- Compact Bento Grid using Flexbox -->
-                        <div class="flex flex-col gap-1.5">
-                            <!-- Top Row: Main + 2 Sides -->
-                            <div class="flex gap-1.5 h-[320px]">
-                                <!-- Slot 1: Main Dish (Large) -->
-                                <div class="w-1/2 h-full overflow-hidden">
-                                    <button 
-                                        x-on:click="openModal('main', 0)"
-                                        class="w-full h-full rounded-xl border-2 transition-all hover:border-red-500 hover:shadow-lg overflow-hidden relative group"
-                                        :class="bentoBox[0] ? 'border-red-500 shadow-md' : 'border-dashed border-gray-300 bg-gray-50'">
+                    <!-- Bento Box -->
+                    <div class="flex-1 relative">
+                    <!-- Bento Box Outer Frame (Wood/Lacquer Style) -->
+                    <div class="bg-gradient-to-br from-[#8B4513] via-[#A0522D] to-[#8B4513] p-3 rounded-2xl shadow-2xl">
+                        <!-- Wood Grain Texture Overlay -->
+                        <div class="absolute inset-0 opacity-20 rounded-2xl" style="background-image: url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 50 Q25 45 50 50 T100 50\" stroke=\"%23000\" stroke-width=\"0.5\" fill=\"none\" opacity=\"0.3\"/%3E%3Cpath d=\"M0 30 Q25 25 50 30 T100 30\" stroke=\"%23000\" stroke-width=\"0.3\" fill=\"none\" opacity=\"0.2\"/%3E%3Cpath d=\"M0 70 Q25 65 50 70 T100 70\" stroke=\"%23000\" stroke-width=\"0.3\" fill=\"none\" opacity=\"0.2\"/%3E%3C/svg%3E');"></div>
+                        
+                        <!-- Inner Lacquer Border -->
+                        <div class="bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] p-1 rounded-xl">
+                            <!-- Red Lacquer Accent -->
+                            <div class="bg-gradient-to-br from-[#8B0000] via-[#B22222] to-[#8B0000] p-0.5 rounded-lg">
+                                <!-- Bento Interior -->
+                                <div class="bg-[#1a1a1a] rounded-lg overflow-hidden">
+                                    <!-- Bento Grid with Dividers -->
+                                    <div class="relative" style="height: 380px;">
                                         
-                                        <template x-if="bentoBox[0]">
-                                            <div class="absolute inset-0">
-                                                <img :src="bentoBox[0]?.image || 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'" 
-                                                     :alt="bentoBox[0]?.name || ''"
-                                                     class="w-full h-full object-cover"
-                                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food';">
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
-                                                    <p class="text-white font-bold text-base" x-text="bentoBox[0].name"></p>
-                                                    <p class="text-white/80 text-xs">Main Dish</p>
-                                                </div>
-                                                <button 
-                                                    x-on:click.stop="removeItem(0)"
-                                                    class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-lg transition-colors z-10">
-                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </template>
+                                        <!-- Wooden Dividers -->
+                                        <div class="absolute top-0 bottom-[90px] left-1/2 w-1.5 bg-gradient-to-b from-[#8B4513] via-[#A0522D] to-[#8B4513] transform -translate-x-1/2 z-10 rounded-full shadow-lg"></div>
+                                        <div class="absolute top-0 right-0 left-1/2 h-1.5 top-[calc(50%-45px)] bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#8B4513] z-10 rounded-full shadow-lg ml-1"></div>
+                                        <div class="absolute left-0 right-0 bottom-[90px] h-1.5 bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#8B4513] z-10 rounded-full shadow-lg"></div>
                                         
-                                        <template x-if="!bentoBox[0]">
-                                            <div class="h-full flex flex-col items-center justify-center p-4">
-                                                <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-3 group-hover:bg-red-200 transition-colors">
-                                                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                                                    </svg>
+                                        <!-- Slot 1: Main Dish (Large - Left Side) -->
+                                        <button 
+                                            x-on:click="openModal('main', 0)"
+                                            class="absolute top-0 left-0 w-[calc(50%-3px)] h-[calc(100%-93px)] overflow-hidden transition-all group"
+                                            :class="bentoBox[0] ? '' : 'hover:bg-white/5'">
+                                            
+                                            <template x-if="bentoBox[0]">
+                                                <div class="absolute inset-0">
+                                                    <img :src="bentoBox[0]?.image || 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'" 
+                                                         :alt="bentoBox[0]?.name || ''"
+                                                         class="w-full h-full object-cover"
+                                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food';">
+                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3">
+                                                        <span class="text-amber-400 text-[10px] font-bold uppercase tracking-wider">Main</span>
+                                                        <p class="text-white font-bold text-sm" x-text="bentoBox[0].name"></p>
+                                                    </div>
+                                                    <button 
+                                                        x-on:click.stop="removeItem(0)"
+                                                        class="absolute top-2 right-2 bg-black/50 hover:bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-lg transition-colors z-10 backdrop-blur-sm">
+                                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                        </svg>
+                                                    </button>
                                                 </div>
-                                                <p class="font-bold text-gray-700 text-sm">Main Dish</p>
-                                                <p class="text-xs text-gray-500">Click to select</p>
-                                            </div>
-                                        </template>
-                                    </button>
-                                </div>
+                                            </template>
+                                            
+                                            <template x-if="!bentoBox[0]">
+                                                <div class="h-full flex flex-col items-center justify-center p-4 text-center">
+                                                    <div class="w-16 h-16 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-3 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
+                                                        <svg class="w-8 h-8 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="font-bold text-amber-600/80 text-sm">Main Dish</p>
+                                                    <p class="text-xs text-white/40 mt-1">Tap to select</p>
+                                                </div>
+                                            </template>
+                                        </button>
 
-                                <!-- Right Column: 2 Side Dishes Stacked -->
-                                <div class="w-1/2 h-full flex flex-col gap-1.5">
-                                    <!-- Slot 2: Side 1 -->
-                                    <div class="h-1/2 overflow-hidden">
+                                        <!-- Slot 2: Side 1 (Top Right) -->
                                         <button 
                                             x-on:click="openModal('side', 1)"
-                                            class="w-full h-full rounded-xl border-2 transition-all hover:border-red-500 hover:shadow-lg overflow-hidden relative group"
-                                            :class="bentoBox[1] ? 'border-red-500 shadow-md' : 'border-dashed border-gray-300 bg-gray-50'">
+                                            class="absolute top-0 right-0 w-[calc(50%-3px)] h-[calc(50%-48px)] overflow-hidden transition-all group"
+                                            :class="bentoBox[1] ? '' : 'hover:bg-white/5'">
                                             
                                             <template x-if="bentoBox[1]">
                                                 <div class="absolute inset-0">
@@ -97,12 +114,12 @@
                                                          :alt="bentoBox[1].name"
                                                          class="w-full h-full object-cover"
                                                          onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Food';">
-                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-2">
                                                         <p class="text-white font-semibold text-xs truncate" x-text="bentoBox[1].name"></p>
                                                     </div>
                                                     <button 
                                                         x-on:click.stop="removeItem(1)"
-                                                        class="absolute top-1.5 right-1.5 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10">
+                                                        class="absolute top-1.5 right-1.5 bg-black/50 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10 backdrop-blur-sm">
                                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                                         </svg>
@@ -112,23 +129,22 @@
                                             
                                             <template x-if="!bentoBox[1]">
                                                 <div class="h-full flex flex-col items-center justify-center p-2">
-                                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-red-200 transition-colors">
-                                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
-                                                    <p class="text-xs font-semibold text-gray-600">Side Dish</p>
+                                                    <p class="text-xs font-semibold text-amber-600/70">Side 1</p>
                                                 </div>
                                             </template>
                                         </button>
-                                    </div>
 
-                                    <!-- Slot 3: Side 2 -->
-                                    <div class="h-1/2 overflow-hidden">
+                                        <!-- Slot 3: Side 2 (Bottom Right) -->
                                         <button 
                                             x-on:click="openModal('side', 2)"
-                                            class="w-full h-full rounded-xl border-2 transition-all hover:border-red-500 hover:shadow-lg overflow-hidden relative group"
-                                            :class="bentoBox[2] ? 'border-red-500 shadow-md' : 'border-dashed border-gray-300 bg-gray-50'">
+                                            class="absolute right-0 w-[calc(50%-3px)] h-[calc(50%-48px)] overflow-hidden transition-all group"
+                                            style="top: calc(50% - 45px);"
+                                            :class="bentoBox[2] ? '' : 'hover:bg-white/5'">
                                             
                                             <template x-if="bentoBox[2]">
                                                 <div class="absolute inset-0">
@@ -136,12 +152,12 @@
                                                          :alt="bentoBox[2].name"
                                                          class="w-full h-full object-cover"
                                                          onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Food';">
-                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-2">
                                                         <p class="text-white font-semibold text-xs truncate" x-text="bentoBox[2].name"></p>
                                                     </div>
                                                     <button 
                                                         x-on:click.stop="removeItem(2)"
-                                                        class="absolute top-1.5 right-1.5 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10">
+                                                        class="absolute top-1.5 right-1.5 bg-black/50 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10 backdrop-blur-sm">
                                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                                         </svg>
@@ -151,58 +167,58 @@
                                             
                                             <template x-if="!bentoBox[2]">
                                                 <div class="h-full flex flex-col items-center justify-center p-2">
-                                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-red-200 transition-colors">
-                                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
-                                                    <p class="text-xs font-semibold text-gray-600">Side Dish</p>
+                                                    <p class="text-xs font-semibold text-amber-600/70">Side 2</p>
+                                                </div>
+                                            </template>
+                                        </button>
+
+                                        <!-- Slot 4: Side 3 (Bottom Full Width) -->
+                                        <button 
+                                            x-on:click="openModal('side', 3)"
+                                            class="absolute bottom-0 left-0 right-0 h-[87px] overflow-hidden transition-all group"
+                                            :class="bentoBox[3] ? '' : 'hover:bg-white/5'">
+                                            
+                                            <template x-if="bentoBox[3]">
+                                                <div class="absolute inset-0">
+                                                    <img :src="bentoBox[3].image || 'https://via.placeholder.com/500x150/f3f4f6/9ca3af?text=Food'" 
+                                                         :alt="bentoBox[3].name"
+                                                         class="w-full h-full object-cover"
+                                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/500x150/f3f4f6/9ca3af?text=Food';">
+                                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-2">
+                                                        <p class="text-white font-semibold text-sm" x-text="bentoBox[3].name"></p>
+                                                    </div>
+                                                    <button 
+                                                        x-on:click.stop="removeItem(3)"
+                                                        class="absolute top-1.5 right-1.5 bg-black/50 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10 backdrop-blur-sm">
+                                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </template>
+                                            
+                                            <template x-if="!bentoBox[3]">
+                                                <div class="h-full flex items-center justify-center gap-3 p-3">
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="text-sm font-semibold text-amber-600/70">Side 3</p>
                                                 </div>
                                             </template>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Bottom Row: Wide Side Dish -->
-                            <div class="h-[90px] overflow-hidden">
-                                <button 
-                                    x-on:click="openModal('side', 3)"
-                                    class="w-full h-full rounded-xl border-2 transition-all hover:border-red-500 hover:shadow-lg overflow-hidden relative group"
-                                    :class="bentoBox[3] ? 'border-red-500 shadow-md' : 'border-dashed border-gray-300 bg-gray-50'">
-                                    
-                                    <template x-if="bentoBox[3]">
-                                        <div class="absolute inset-0">
-                                            <img :src="bentoBox[3].image || 'https://via.placeholder.com/500x150/f3f4f6/9ca3af?text=Food'" 
-                                                 :alt="bentoBox[3].name"
-                                                 class="w-full h-full object-cover"
-                                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/500x150/f3f4f6/9ca3af?text=Food';">
-                                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                                                <p class="text-white font-semibold text-sm" x-text="bentoBox[3].name"></p>
-                                            </div>
-                                            <button 
-                                                x-on:click.stop="removeItem(3)"
-                                                class="absolute top-1.5 right-1.5 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-colors z-10">
-                                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    
-                                    <template x-if="!bentoBox[3]">
-                                        <div class="h-full flex items-center justify-center gap-3 p-3">
-                                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-red-200 transition-colors">
-                                                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                                                </svg>
-                                            </div>
-                                            <p class="text-sm font-semibold text-gray-600">Side Dish</p>
-                                        </div>
-                                    </template>
-                                </button>
-                            </div>
                         </div>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
