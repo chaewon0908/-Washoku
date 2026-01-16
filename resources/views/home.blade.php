@@ -52,21 +52,29 @@
                         name: 'Character/Decorative Bento (Kyaraben)',
                         description: 'Bento designed with creative food art, especially popular for kids',
                         image: 'https://static1.squarespace.com/static/6217a6968b376a434418ae8b/t/6416043616fc5e2dca82c202/1679164471002/Show%2BYour%2BLove%2Bwith%2Bour%2BMiso%2BTasty%2BBento%2BBox%2BLunch%2BIdeas.jpg?format=1500w',
-                        price: 299
+                        price: 299,
+                        isCustomBento: false
                     },
                     {
                         name: 'Makunouchi Bento',
                         description: 'Classic lunch box with rice, grilled fish, egg, and pickles',
                         image: 'https://www.webstaurantstore.com/uploads/blog/2023/1/bento-box_what-is-bento.jpg',
-                        price: 329
+                        price: 329,
+                        isCustomBento: false
                     },
                     {
                         name: 'Premium Bento Box',
                         description: 'Build your own! Choose main dish and 3 sides',
                         image: 'https://m.media-amazon.com/images/I/71E1qGpcb3L.jpg',
-                        price: 399
+                        price: 399,
+                        isCustomBento: true
                     }
                 ],
+                getLink(bento) {
+                    return bento.isCustomBento 
+                        ? '/bento-builder' 
+                        : '/menu/bento-boxes?item=' + encodeURIComponent(bento.name);
+                },
                 autoRotate() {
                     setInterval(() => {
                         this.currentSlide = (this.currentSlide + 1) % this.bentos.length;
@@ -134,9 +142,9 @@
                                                     <span class="text-white/60 text-sm">Starting at</span>
                                                     <span class="text-amber-400 font-bold text-2xl md:text-3xl ml-2">₱<span x-text="bento.price"></span></span>
                                                 </div>
-                                                <a href="/bento-builder" 
+                                                <a :href="getLink(bento)" 
                                                    class="group inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-                                                    <span>Order Now</span>
+                                                    <span x-text="bento.isCustomBento ? 'Build Now' : 'Order Now'"></span>
                                                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                                     </svg>
@@ -485,3 +493,7 @@
     </div>
 </section>
 @endsection
+
+
+
+

@@ -316,14 +316,50 @@
     </div>
 </div>
 
+@php
+$menuItemsJson = $items->map(function($item) {
+    return [
+        'id' => $item->id,
+        'name' => $item->name,
+        'description' => $item->description,
+        'price' => $item->price,
+        'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
+        'is_featured' => $item->is_featured ?? false,
+        'is_bestseller' => $item->is_bestseller ?? false,
+        'is_custom_bento' => $item->name === 'Custom Bento Box (4 compartments)'
+    ];
+})->values();
+@endphp
+
 <script>
 function menuItemsPage() {
     return {
         showModal: false,
         selectedItem: null,
+        menuItems: @json($menuItemsJson),
         
         init() {
             console.log('Menu items page initialized');
+            
+            // Check for item query parameter to auto-open modal
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemName = urlParams.get('item');
+            
+            if (itemName) {
+                // Find the item by name (case-insensitive partial match)
+                const decodedName = decodeURIComponent(itemName).toLowerCase();
+                const matchingItem = this.menuItems.find(item => 
+                    item.name.toLowerCase().includes(decodedName) || 
+                    decodedName.includes(item.name.toLowerCase())
+                );
+                
+                if (matchingItem) {
+                    // Small delay to ensure page is fully loaded
+                    setTimeout(() => {
+                        this.openItemModal(matchingItem);
+                    }, 300);
+                }
+            }
         },
         
         openItemModal(item) {
