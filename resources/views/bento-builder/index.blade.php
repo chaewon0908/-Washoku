@@ -507,7 +507,7 @@ function bentoBuilder() {
                         quantity: 1
                     });
                     this.bentoBox = [null, null, null, null];
-                    alert('Bento box added to cart!');
+                    // Toast is shown by cart store's add function
                 } else {
                     const authCheck = document.querySelector('meta[name="auth-check"]')?.content;
                     const userId = document.querySelector('meta[name="user-id"]')?.content;
@@ -524,11 +524,23 @@ function bentoBuilder() {
                     localStorage.setItem(cartKey, JSON.stringify(existingCart));
                     this.bentoBox = [null, null, null, null];
                     window.dispatchEvent(new CustomEvent('cart-updated'));
-                    alert('Bento box added to cart!');
+                    // Show toast notification
+                    window.dispatchEvent(new CustomEvent('show-toast', {
+                        detail: {
+                            title: 'Added to Cart!',
+                            message: 'Custom Bento Box'
+                        }
+                    }));
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
-                alert('There was an error adding the item to cart. Please try again.');
+                // Show error toast
+                window.dispatchEvent(new CustomEvent('show-toast', {
+                    detail: {
+                        title: 'Error',
+                        message: 'Failed to add item. Please try again.'
+                    }
+                }));
             }
         }
     }

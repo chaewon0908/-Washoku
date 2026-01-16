@@ -412,10 +412,17 @@ function menuItemsPage() {
                 localStorage.setItem(cartKey, JSON.stringify(existingCart));
                 
                 window.dispatchEvent(new CustomEvent('cart-updated'));
+                
+                // Show toast notification for fallback method
+                window.dispatchEvent(new CustomEvent('show-toast', {
+                    detail: {
+                        title: 'Added to Cart!',
+                        message: item.name
+                    }
+                }));
             }
             
             this.closeModal();
-            alert('Added to cart: ' + item.name);
         }
     }
 }
