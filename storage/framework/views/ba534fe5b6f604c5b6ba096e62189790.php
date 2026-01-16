@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 
 <!-- Hero Section - Dark Japanese Theme -->
-<section class="relative min-h-[700px] flex items-center bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] overflow-hidden">
+<section class="relative min-h-[700px] bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] overflow-hidden">
     
     <!-- Seigaiha Wave Pattern -->
     <div class="absolute inset-0 opacity-[0.05] seigaiha-pattern"></div>
@@ -24,10 +24,10 @@
     <!-- Gold Accent Lines -->
     <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/50 to-transparent"></div>
     
-    <div class="container mx-auto px-4 py-20 relative z-10">
-        <div class="max-w-6xl mx-auto">
-            
-            <div class="text-center mb-8">
+    <div class="relative z-10 w-full">
+        <!-- Header Text -->
+        <div class="container mx-auto px-4 pt-20 pb-8">
+            <div class="max-w-6xl mx-auto text-center">
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-2.5 rounded-full mb-6 border border-white/10">
                     <span class="text-amber-400 text-lg">🍱</span>
                     <span class="text-white/90 text-sm font-medium tracking-wide">Premium Japanese Cuisine</span>
@@ -35,12 +35,14 @@
                 <h1 class="text-6xl md:text-8xl font-bold font-serif text-white mb-6 leading-tight">
                     PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">BENTO</span>
                 </h1>
-                <p class="text-white/70 text-center text-xl md:text-2xl mb-12 max-w-3xl mx-auto">
+                <p class="text-white/70 text-center text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
                     Authentic Japanese flavors in one beautiful box
                 </p>
             </div>
-            
-            <!-- Bento Carousel -->
+        </div>
+        
+        <!-- Bento Banner Carousel - Aligned with Nav -->
+        <div class="container mx-auto px-4">
             <div x-data="{ 
                 currentSlide: 0,
                 bentos: [
@@ -71,77 +73,93 @@
             }" 
             x-init="autoRotate()"
             class="relative">
-                <div class="flex items-center justify-center gap-4 md:gap-8">
+                
+                <!-- Banner Container - With Border -->
+                <div class="relative overflow-hidden rounded-2xl border border-white/20 shadow-2xl">
                     
-                    <!-- Left Arrow -->
-                    <button 
-                        @click="currentSlide = (currentSlide - 1 + bentos.length) % bentos.length" 
-                        class="flex-shrink-0 w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all duration-300 flex items-center justify-center group shadow-lg hover:scale-110">
-                        <svg class="w-6 h-6 text-white/80 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    
-                    <!-- Carousel Content -->
-                    <div class="flex-1 max-w-4xl">
-                        <div class="relative h-[420px] md:h-[480px]">
+                        <!-- Left Arrow -->
+                        <button 
+                            @click="currentSlide = (currentSlide - 1 + bentos.length) % bentos.length" 
+                            class="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-amber-400/50 transition-all duration-300 flex items-center justify-center group shadow-lg">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-white/90 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Right Arrow -->
+                        <button 
+                            @click="currentSlide = (currentSlide + 1) % bentos.length" 
+                            class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-amber-400/50 transition-all duration-300 flex items-center justify-center group shadow-lg">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-white/90 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Banner Slides -->
+                        <div class="relative w-full h-[350px] md:h-[450px] lg:h-[500px] overflow-hidden">
                             <template x-for="(bento, index) in bentos" :key="index">
                                 <div 
                                     x-show="currentSlide === index"
-                                    x-transition:enter="transition ease-out duration-700"
-                                    x-transition:enter-start="opacity-0 scale-95"
-                                    x-transition:enter-end="opacity-100 scale-100"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 scale-100"
-                                    x-transition:leave-end="opacity-0 scale-95"
-                                    class="absolute inset-0 flex flex-col items-center justify-center">
+                                    x-transition.opacity.duration.500ms
+                                    class="absolute inset-0 w-full h-full">
                                     
-                                    <!-- Bento Image -->
-                                    <div class="relative mb-8 group">
-                                        <div class="absolute -inset-4 bg-gradient-to-br from-red-500/30 to-amber-500/30 rounded-full blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
-                                        <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-4 ring-amber-400/30 shadow-2xl">
-                                            <img :src="bento.image" :alt="bento.name" 
-                                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Bento';">
-                                        </div>
-                                    </div>
+                                    <!-- Background Image -->
+                                    <img :src="bento.image" :alt="bento.name" 
+                                         class="w-full h-full object-cover object-center"
+                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x450/1a1a1a/9ca3af?text=Bento';">
                                     
-                                    <!-- Bento Info -->
-                                    <div class="text-center px-4">
-                                        <div class="inline-flex items-center gap-4 bg-white/10 backdrop-blur-md px-8 py-4 rounded-2xl mb-4 border border-white/10">
-                                            <span class="text-white font-bold text-lg" x-text="bento.name"></span>
-                                            <span class="text-amber-400 font-bold text-lg">₱<span x-text="bento.price"></span></span>
+                                    <!-- Gradient Overlay -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                    
+                                    <!-- Content Overlay -->
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="px-8 md:px-16 lg:px-20 max-w-2xl">
+                                            <!-- Badge -->
+                                            <div class="inline-flex items-center gap-2 bg-amber-400/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 border border-amber-400/30">
+                                                <span class="text-amber-400 text-sm font-semibold">Featured Bento</span>
+                                            </div>
+                                            
+                                            <!-- Title -->
+                                            <h3 class="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight" x-text="bento.name"></h3>
+                                            
+                                            <!-- Description -->
+                                            <p class="text-white/70 text-sm md:text-lg mb-6 max-w-md" x-text="bento.description"></p>
+                                            
+                                            <!-- Price & CTA -->
+                                            <div class="flex flex-wrap items-center gap-4">
+                                                <div class="bg-white/10 backdrop-blur-sm px-5 py-3 rounded-xl border border-white/10">
+                                                    <span class="text-white/60 text-sm">Starting at</span>
+                                                    <span class="text-amber-400 font-bold text-2xl md:text-3xl ml-2">₱<span x-text="bento.price"></span></span>
+                                                </div>
+                                                <a href="/bento-builder" 
+                                                   class="group inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                                                    <span>Order Now</span>
+                                                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                    </svg>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <p class="text-white/60 text-base md:text-lg max-w-lg mx-auto" x-text="bento.description"></p>
                                     </div>
                                 </div>
                             </template>
                         </div>
+                        
+                        <!-- Dots Indicator (inside banner) -->
+                        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                            <template x-for="(bento, index) in bentos" :key="index">
+                                <button 
+                                    @click="currentSlide = index"
+                                    :class="currentSlide === index ? 'w-8 bg-amber-400' : 'w-3 bg-white/40 hover:bg-white/60'"
+                                    class="h-3 rounded-full transition-all duration-300">
+                                </button>
+                            </template>
+                        </div>
                     </div>
-                    
-                    <!-- Right Arrow -->
-                    <button 
-                        @click="currentSlide = (currentSlide + 1) % bentos.length" 
-                        class="flex-shrink-0 w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-amber-400/30 transition-all duration-300 flex items-center justify-center group shadow-lg hover:scale-110">
-                        <svg class="w-6 h-6 text-white/80 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
                 
-                <!-- Dots -->
-                <div class="flex justify-center gap-3 mt-8">
-                    <template x-for="(bento, index) in bentos" :key="index">
-                        <button 
-                            @click="currentSlide = index"
-                            :class="currentSlide === index ? 'w-10 bg-amber-400' : 'w-3 bg-white/30 hover:bg-white/50'"
-                            class="h-3 rounded-full transition-all duration-300">
-                        </button>
-                    </template>
-                </div>
-                
-                <!-- CTA Button -->
-                <div class="text-center mt-10">
+                <!-- CTA Button Below Banner -->
+                <div class="text-center mt-10 pb-12">
                     <a href="/bento-builder" 
                        class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xl px-12 py-5 rounded-full transition-all duration-300 shadow-xl hover:shadow-red-900/40 hover:scale-105 overflow-hidden border border-red-500/30">
                         <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
