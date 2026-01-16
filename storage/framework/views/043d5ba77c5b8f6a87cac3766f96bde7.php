@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Login - Washoku Japanese Restaurant'); ?>
 
 <?php $__env->startSection('content'); ?>
