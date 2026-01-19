@@ -56,3 +56,186 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* ============================================
+   HEADER STYLES - Japanese Restaurant Theme
+   ============================================ */
+
+/* Seigaiha (Japanese Wave) Pattern */
+.seigaiha-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath fill='%23ffffff' fill-opacity='0.4' d='M0 40a19.96 19.96 0 0 1 5.9-14.11 20.17 20.17 0 0 1 19.44-5.52A20 20 0 0 1 20.2 40H0zM65.32.75A20.02 20.02 0 0 1 40.8 25.26 20.02 20.02 0 0 1 65.32.76zM.07 0h20.1l-.08.07A20.02 20.02 0 0 1 .75 5.25 20.08 20.08 0 0 1 .07 0zm1.94 40h2.53l4.26-4.24v-9.78A17.96 17.96 0 0 0 2 40zm5.38 0h9.8a17.98 17.98 0 0 0 6.67-16.42L7.4 40zm3.43-15.42v9.17l11.62-11.59c-3.97-.5-8.08.3-11.62 2.42zm32.86-.78A18 18 0 0 0 63.85 40h.07a20 20 0 0 0 .56-7.32 18.09 18.09 0 0 0-20.86-16.88zm5.72 15.36A15.98 15.98 0 0 1 49.25 40h4.25l2.13-2.13c.05-.05.08-.1.12-.14zM65.98 39c.02-.34.02-.69.02-1.03v-.18a15.93 15.93 0 0 0-4.71-11.32 15.99 15.99 0 0 0-11.32-4.69c-.34 0-.68 0-1.02.02a16 16 0 0 0-10.18 4.67A15.98 15.98 0 0 0 34.1 37.87c.02.34.02.69.02 1.03v.1h-.04A18 18 0 0 1 52 21.68V21.6a18 18 0 0 1 12.84 14.28c.68 3.76.43 7.58-.86 11.12zM40 40a19.79 19.79 0 0 1-5.73-13.89 19.79 19.79 0 0 1 5.73-13.89 19.97 19.97 0 0 1 28.29 0A19.79 19.79 0 0 1 74 26.11 19.79 19.79 0 0 1 68.29 40h-4.38a15.96 15.96 0 0 0 4.68-11.32v-.18a15.93 15.93 0 0 0-4.69-11.14 16 16 0 0 0-22.64 0A15.93 15.93 0 0 0 36.57 28.5v.18A15.96 15.96 0 0 0 41.25 40H40z'/%3E%3C/svg%3E");
+    background-size: 80px 40px;
+    animation: waveMove 20s linear infinite;
+}
+
+@keyframes waveMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 80px 40px;
+    }
+}
+
+/* Cherry Blossom Petals */
+.cherry-petal {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(ellipse at center, #ffb7c5 0%, #ff8fa3 50%, transparent 70%);
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.petal-1 {
+    top: 10%;
+    left: 10%;
+    animation: petalFall1 15s linear infinite;
+}
+
+.petal-2 {
+    top: 5%;
+    left: 30%;
+    animation: petalFall2 18s linear infinite;
+    animation-delay: -3s;
+}
+
+.petal-3 {
+    top: 15%;
+    left: 60%;
+    animation: petalFall3 12s linear infinite;
+    animation-delay: -7s;
+}
+
+.petal-4 {
+    top: 8%;
+    left: 80%;
+    animation: petalFall1 20s linear infinite;
+    animation-delay: -5s;
+}
+
+.petal-5 {
+    top: 12%;
+    left: 45%;
+    animation: petalFall2 16s linear infinite;
+    animation-delay: -10s;
+}
+
+@keyframes petalFall1 {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100px) translateX(50px) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFall2 {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(80px) translateX(-30px) rotate(-360deg) scale(0.3);
+        opacity: 0;
+    }
+}
+
+@keyframes petalFall3 {
+    0% {
+        transform: translateY(0) translateX(0) rotate(45deg) scale(1.2);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(120px) translateX(20px) rotate(405deg) scale(0.4);
+        opacity: 0;
+    }
+}
+
+/* Steam Animation for Logo */
+.steam-line {
+    animation: steamRise 2s ease-in-out infinite;
+}
+
+.steam-line:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.steam-line:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes steamRise {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-2px);
+    }
+}
+
+/* Japanese Text Glow Effect */
+.japanese-text-glow {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 40px rgba(251, 191, 36, 0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    @apply relative py-2.5 px-4 rounded-lg font-semibold text-white/80 transition-all duration-300;
+}
+
+.nav-link:hover {
+    @apply text-white bg-white/5;
+}
+
+.nav-link::after {
+    content: '';
+    @apply absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-amber-400 to-red-400 opacity-0 transition-all duration-300 rounded-full;
+    transform: scaleX(0);
+}
+
+.nav-link:hover::after {
+    @apply opacity-100;
+    transform: scaleX(1);
+}
+
+.nav-link-active {
+    @apply text-amber-300 bg-white/5;
+}
+
+.nav-link-active::after {
+    @apply opacity-100;
+    transform: scaleX(1);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .cherry-petal,
+    .seigaiha-pattern,
+    .steam-line {
+        animation: none;
+    }
+}

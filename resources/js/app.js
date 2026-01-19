@@ -87,6 +87,18 @@ document.addEventListener('alpine:init', () => {
             this.updateCount();
             await this.save();
             this.dispatchUpdate();
+            
+            // Show toast notification
+            this.showToast(item.name);
+        },
+        
+        showToast(itemName) {
+            window.dispatchEvent(new CustomEvent('show-toast', {
+                detail: {
+                    title: 'Added to Cart!',
+                    message: itemName
+                }
+            }));
         },
 
         addToCart(id, name, price, image) {
