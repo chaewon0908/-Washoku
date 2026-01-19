@@ -50,7 +50,7 @@
     <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-red-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
-    <div class="container mx-auto px-4 relative z-10">
+    <div class="container mx-auto px-4 relative z-10" x-data="menuItemsPage()">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             @if(session('success'))
             <div class="m-6 mb-0 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl flex items-center gap-3">
@@ -184,13 +184,11 @@
                                     <a href="{{ route('admin.menu-items.edit', $item) }}" class="text-blue-600 hover:text-blue-700 font-semibold text-sm">
                                         Edit
                                     </a>
-                                    <form method="POST" action="{{ route('admin.menu-items.destroy', $item) }}" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this menu item?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-700 font-semibold text-sm">
-                                            Delete
-                                        </button>
-                                    </form>
+                                    <button type="button" 
+                                            @click="openDeleteModal({{ $item->id }}, {{ json_encode($item->name) }}, {{ json_encode(route('admin.menu-items.destroy', $item)) }})"
+                                            class="text-red-600 hover:text-red-700 font-semibold text-sm">
+                                        Delete
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -228,6 +226,178 @@
             </div>
             @endif
         </div>
+        
+        <!-- Delete Confirmation Modal -->
+    <div x-show="showDeleteModal" 
+         x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+         @click.self="showDeleteModal = false"
+         @keydown.escape.window="showDeleteModal = false">
+        
+        <div x-show="showDeleteModal"
+             x-transition:enter="transition ease-out duration-500"
+             x-transition:enter-start="opacity-0 scale-50 rotate-12"
+             x-transition:enter-end="opacity-100 scale-100 rotate-0"
+             x-transition:leave="transition ease-in duration-300"
+             x-transition:leave-start="opacity-100 scale-100 rotate-0"
+             x-transition:leave-end="opacity-0 scale-90 rotate-12"
+             class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative">
+            
+            <!-- Warning Icon Background -->
+            <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-red-400 via-red-500 to-red-600 opacity-10"></div>
+            
+            <!-- Modal Content -->
+            <div class="relative flex flex-col items-center pt-12 pb-8 px-6">
+                <!-- Warning Icon -->
+                <div class="w-24 h-24 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-6 shadow-lg animate-bounce-in">
+                    <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="true"
+                         x-transition:enter="transition ease-out duration-500 delay-300"
+                         x-transition:enter-start="opacity-0 scale-0"
+                         x-transition:enter-end="opacity-100 scale-100">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                
+                <!-- Warning Message -->
+                <h2 class="text-2xl font-bold text-gray-800 mb-2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Delete Menu Item?
+                </h2>
+                <p class="text-gray-600 text-center mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    Are you sure you want to delete
+                </p>
+                
+                <!-- Item Name -->
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 mb-6 w-full border-2 border-red-200 animate-scale-in" style="animation-delay: 0.4s;">
+                    <p class="text-lg font-bold text-red-800 text-center" x-text="deleteItemName"></p>
+                </div>
+                
+                <p class="text-sm text-gray-500 text-center mb-6 animate-fade-in-up" style="animation-delay: 0.5s;">
+                    This action cannot be undone.
+                </p>
+                
+                <!-- Hidden Form for Deletion -->
+                <form :action="deleteFormAction" method="POST" x-ref="deleteForm" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <button type="button"
+                            @click="showDeleteModal = false"
+                            class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                        Cancel
+                    </button>
+                    <button type="button"
+                            @click="confirmDelete()"
+                            :disabled="deleting"
+                            class="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                        <span x-show="!deleting">Delete</span>
+                        <span x-show="deleting" class="flex items-center gap-2">
+                            <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Deleting...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+@push('scripts')
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+    
+    @keyframes bounce-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes scale-in {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    .animate-bounce-in {
+        animation: bounce-in 0.6s ease-out forwards;
+    }
+    
+    .animate-fade-in-up {
+        opacity: 0;
+        animation: fade-in-up 0.5s ease-out forwards;
+    }
+    
+    .animate-scale-in {
+        opacity: 0;
+        animation: scale-in 0.4s ease-out forwards;
+    }
+</style>
+
+<script>
+function menuItemsPage() {
+    return {
+        showDeleteModal: false,
+        deleteItemId: null,
+        deleteItemName: '',
+        deleteFormAction: '',
+        deleting: false,
+        
+        openDeleteModal(id, name, action) {
+            console.log('Opening delete modal:', id, name, action);
+            this.deleteItemId = id;
+            this.deleteItemName = name;
+            this.deleteFormAction = action;
+            this.showDeleteModal = true;
+            console.log('Modal state:', this.showDeleteModal);
+        },
+        
+        confirmDelete() {
+            this.deleting = true;
+            // Submit the hidden form
+            this.$refs.deleteForm.submit();
+        }
+    }
+}
+</script>
+@endpush
 @endsection

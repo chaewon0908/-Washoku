@@ -1,6 +1,60 @@
 <?php $__env->startSection('title', 'Shopping Cart'); ?>
 
 <?php $__env->startSection('content'); ?>
+<style>
+    @keyframes bounce-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes scale-in {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    .animate-bounce-in {
+        animation: bounce-in 0.6s ease-out forwards;
+    }
+    
+    .animate-fade-in-up {
+        opacity: 0;
+        animation: fade-in-up 0.5s ease-out forwards;
+    }
+    
+    .animate-scale-in {
+        opacity: 0;
+        animation: scale-in 0.4s ease-out forwards;
+    }
+</style>
 
 <!-- Hero Section - Dark Theme -->
 <section class="relative bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] py-12 overflow-hidden">
@@ -272,6 +326,75 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Success Modal -->
+            <div x-show="showSuccessModal" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                 style="display: none;">
+                
+                <div x-show="showSuccessModal"
+                     x-transition:enter="transition ease-out duration-500"
+                     x-transition:enter-start="opacity-0 scale-50 rotate-12"
+                     x-transition:enter-end="opacity-100 scale-100 rotate-0"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 scale-100 rotate-0"
+                     x-transition:leave-end="opacity-0 scale-90 rotate-12"
+                     class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative">
+                    
+                    <!-- Success Icon Background -->
+                    <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-green-400 via-green-500 to-emerald-500 opacity-10"></div>
+                    
+                    <!-- Animated Checkmark -->
+                    <div class="relative flex flex-col items-center pt-12 pb-8 px-6">
+                        <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-lg animate-bounce-in">
+                            <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="true"
+                                 x-transition:enter="transition ease-out duration-500 delay-300"
+                                 x-transition:enter-start="opacity-0 scale-0"
+                                 x-transition:enter-end="opacity-100 scale-100">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Success Message -->
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                            Order Placed!
+                        </h2>
+                        <p class="text-gray-600 text-center mb-6 animate-fade-in-up" style="animation-delay: 0.3s;">
+                            Your order has been successfully placed
+                        </p>
+                        
+                        <!-- Order ID -->
+                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 mb-6 w-full border-2 border-gray-200 animate-scale-in" style="animation-delay: 0.4s;">
+                            <p class="text-xs text-gray-500 uppercase tracking-wider mb-1 text-center">Order ID</p>
+                            <p class="text-xl font-bold text-gray-800 text-center font-mono" x-text="orderNumber"></p>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-3 w-full animate-fade-in-up" style="animation-delay: 0.5s;">
+                            <a href="/menu" 
+                               class="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                                Browse More
+                            </a>
+                            <a href="/dashboard" 
+                               class="flex-1 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -282,6 +405,8 @@ function cartPage() {
     return {
         showCheckout: false,
         checkingOut: false,
+        showSuccessModal: false,
+        orderNumber: '',
         checkoutForm: {
             gcash_number: '',
             delivery_address: '',
@@ -352,10 +477,11 @@ function cartPage() {
                     throw new Error(errorMsg);
                 }
                 
-                alert('Order placed successfully! Order Number: ' + data.order.order_number);
+                // Show success modal instead of alert
+                this.orderNumber = data.order.order_number;
                 await this.$store.cart.clear();
                 this.showCheckout = false;
-                window.location.href = '/dashboard/orders';
+                this.showSuccessModal = true;
             } catch (error) {
                 console.error('Checkout error:', error);
                 alert('Error: ' + error.message);
