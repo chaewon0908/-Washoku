@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Alpine.js x-cloak */
+[x-cloak] { display: none !important; }
+
 /* Custom Colors */
 :root {
     --warm-cream: #f5f1e8;

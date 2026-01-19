@@ -18,11 +18,11 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex justify-between items-center">
             <div>
-                <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3">Admin Panel</p>
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-serif">
-                    Manage <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Orders</span>
+                <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Admin Panel</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-english reveal">
+                    Manage <span class="gradient-text-animate">Orders</span>
                 </h1>
-                <p class="text-white/60 text-lg">View and update active orders status</p>
+                <p class="text-white/60 text-lg reveal" style="transition-delay: 200ms;">View and update active orders status</p>
             </div>
             <div class="hidden md:flex items-center gap-4">
                 <a href="<?php echo e(route('admin.orders.completed')); ?>" class="flex items-center gap-2 text-white/70 hover:text-green-400 transition-colors">
@@ -30,6 +30,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     Completed Orders
+                </a>
+                <span class="text-white/30">|</span>
+                <a href="<?php echo e(route('admin.orders.cancelled')); ?>" class="flex items-center gap-2 text-white/70 hover:text-red-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    Cancelled Orders
                 </a>
                 <span class="text-white/30">|</span>
                 <a href="<?php echo e(route('admin.index')); ?>" class="flex items-center gap-2 text-white/70 hover:text-amber-400 transition-colors">
@@ -50,7 +57,7 @@
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="container mx-auto px-4 relative z-10">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100" x-data="{ searchQuery: '<?php echo e(request('search')); ?>' }">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 reveal" x-data="{ searchQuery: '<?php echo e(request('search')); ?>' }">
             
             <!-- Search Bar -->
             <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
@@ -109,18 +116,18 @@
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Order #</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Customer</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Items</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Date</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Total</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Status</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Actions</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Order #</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Customer</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Items</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Date</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Total</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Status</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr class="hover:bg-gray-50/50 transition-colors">
+                        <tr class="hover:bg-gradient-to-r hover:from-gray-50/50 hover:to-white/50 transition-all duration-200 reveal-scale" style="transition-delay: <?php echo e($loop->index * 30); ?>ms;">
                             <td class="py-4 px-6">
                                 <span class="font-bold text-gray-800"><?php echo e($order->order_number); ?></span>
                             </td>
@@ -156,14 +163,21 @@
                                 <span class="text-lg font-bold text-red-600">₱<?php echo e(number_format($order->total, 2)); ?></span>
                             </td>
                             <td class="py-4 px-6">
-                                <span class="px-3 py-1.5 rounded-full text-xs font-semibold
-                                    <?php if($order->status === 'pending'): ?> bg-amber-100 text-amber-700
-                                    <?php elseif($order->status === 'confirmed'): ?> bg-blue-100 text-blue-700
-                                    <?php elseif($order->status === 'preparing'): ?> bg-purple-100 text-purple-700
-                                    <?php elseif($order->status === 'delivering'): ?> bg-indigo-100 text-indigo-700
-                                    <?php elseif($order->status === 'completed'): ?> bg-green-100 text-green-700
-                                    <?php else: ?> bg-red-100 text-red-700
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+                                    <?php if($order->status === 'pending'): ?> bg-gradient-to-r from-amber-100 to-amber-50 text-amber-700 border border-amber-200
+                                    <?php elseif($order->status === 'confirmed'): ?> bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 border border-blue-200
+                                    <?php elseif($order->status === 'preparing'): ?> bg-gradient-to-r from-purple-100 to-purple-50 text-purple-700 border border-purple-200
+                                    <?php elseif($order->status === 'delivering'): ?> bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-700 border border-indigo-200
+                                    <?php elseif($order->status === 'completed'): ?> bg-gradient-to-r from-green-100 to-green-50 text-green-700 border border-green-200
+                                    <?php else: ?> bg-gradient-to-r from-red-100 to-red-50 text-red-700 border border-red-200
                                     <?php endif; ?>">
+                                    <?php if($order->status === 'completed'): ?>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    <?php elseif($order->status === 'pending'): ?>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                                    <?php elseif($order->status === 'delivering'): ?>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"/></svg>
+                                    <?php endif; ?>
                                     <?php echo e(ucfirst($order->status)); ?>
 
                                 </span>
@@ -171,7 +185,14 @@
                             <td class="py-4 px-6">
                                 <form method="POST" action="<?php echo e(route('admin.orders.update-status', $order)); ?>" class="inline-block">
                                     <?php echo csrf_field(); ?>
-                                    <select name="status" onchange="this.form.submit()" class="px-3 py-2 text-sm border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white cursor-pointer">
+                                    <select name="status" onchange="this.form.submit()" class="px-3 py-2 text-sm font-semibold rounded-lg border-2 transition-all duration-200 shadow-sm hover:shadow-md
+                                        <?php if($order->status === 'pending'): ?> bg-gradient-to-r from-amber-50 to-amber-100/50 text-amber-700 border-amber-300 hover:border-amber-400
+                                        <?php elseif($order->status === 'confirmed'): ?> bg-gradient-to-r from-blue-50 to-blue-100/50 text-blue-700 border-blue-300 hover:border-blue-400
+                                        <?php elseif($order->status === 'preparing'): ?> bg-gradient-to-r from-purple-50 to-purple-100/50 text-purple-700 border-purple-300 hover:border-purple-400
+                                        <?php elseif($order->status === 'delivering'): ?> bg-gradient-to-r from-indigo-50 to-indigo-100/50 text-indigo-700 border-indigo-300 hover:border-indigo-400
+                                        <?php elseif($order->status === 'completed'): ?> bg-gradient-to-r from-green-50 to-green-100/50 text-green-700 border-green-300 hover:border-green-400
+                                        <?php else: ?> bg-gradient-to-r from-red-50 to-red-100/50 text-red-700 border-red-300 hover:border-red-400
+                                        <?php endif; ?>">
                                         <option value="pending" <?php echo e($order->status === 'pending' ? 'selected' : ''); ?>>Pending</option>
                                         <option value="confirmed" <?php echo e($order->status === 'confirmed' ? 'selected' : ''); ?>>Confirmed</option>
                                         <option value="preparing" <?php echo e($order->status === 'preparing' ? 'selected' : ''); ?>>Preparing</option>
@@ -200,7 +221,9 @@
                 </div>
                 <p class="text-gray-500 text-lg">No active orders found</p>
                 <p class="text-gray-400 text-sm mt-2">Completed orders can be found in the 
-                    <a href="<?php echo e(route('admin.orders.completed')); ?>" class="text-green-600 hover:text-green-700 font-medium">Completed Orders</a> dashboard
+                    <a href="<?php echo e(route('admin.orders.completed')); ?>" class="text-green-600 hover:text-green-700 font-medium">Completed Orders</a> dashboard.
+                    Cancelled orders can be found in the 
+                    <a href="<?php echo e(route('admin.orders.cancelled')); ?>" class="text-red-600 hover:text-red-700 font-medium">Cancelled Orders</a> dashboard.
                 </p>
             </div>
             <?php endif; ?>

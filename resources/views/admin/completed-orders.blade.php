@@ -20,13 +20,20 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex justify-between items-center">
             <div>
-                <p class="text-green-400/80 text-sm font-medium tracking-widest uppercase mb-3">Order History</p>
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-serif">
-                    Completed <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-300">Orders</span>
+                <p class="text-green-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Order History</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-english reveal">
+                    Completed <span class="gradient-text-animate">Orders</span>
                 </h1>
-                <p class="text-white/60 text-lg">View all successfully fulfilled orders</p>
+                <p class="text-white/60 text-lg reveal" style="transition-delay: 200ms;">View all successfully fulfilled orders</p>
             </div>
             <div class="hidden md:flex items-center gap-4">
+                <a href="{{ route('admin.orders.cancelled') }}" class="flex items-center gap-2 text-white/70 hover:text-red-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    Cancelled Orders
+                </a>
+                <span class="text-white/30">|</span>
                 <a href="{{ route('admin.orders') }}" class="flex items-center gap-2 text-white/70 hover:text-amber-400 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -52,7 +59,7 @@
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="container mx-auto px-4 relative z-10">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100" x-data="{ searchQuery: '{{ request('search') }}' }">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 reveal" x-data="{ searchQuery: '{{ request('search') }}' }">
             
             <!-- Search Bar -->
             <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-green-50/50 to-white">
@@ -110,18 +117,18 @@
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gradient-to-r from-green-50/50 to-white border-b border-gray-100">
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Order #</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Customer</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Items</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Date Completed</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Total</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Status</th>
-                            <th class="text-left py-4 px-6 font-semibold text-gray-600 text-sm">Actions</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Order #</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Customer</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Items</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Date Completed</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Total</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Status</th>
+                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @foreach($orders as $order)
-                        <tr class="hover:bg-green-50/30 transition-colors">
+                        <tr class="hover:bg-gradient-to-r hover:from-green-50/30 hover:to-white/50 transition-all duration-200 reveal-scale" style="transition-delay: {{ $loop->index * 30 }}ms;">
                             <td class="py-4 px-6">
                                 <span class="font-bold text-gray-800">{{ $order->order_number }}</span>
                             </td>

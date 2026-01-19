@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Manage Orders - Admin Panel')
+@section('title', 'All Orders - Admin Panel')
 
 @section('content')
 
@@ -20,13 +20,20 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex justify-between items-center">
             <div>
-                <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Admin Panel</p>
+                <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Order Management</p>
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-english reveal">
-                    Manage <span class="gradient-text-animate">Orders</span>
+                    All <span class="gradient-text-animate">Orders</span>
                 </h1>
-                <p class="text-white/60 text-lg reveal" style="transition-delay: 200ms;">View and update active orders status</p>
+                <p class="text-white/60 text-lg reveal" style="transition-delay: 200ms;">View and manage all orders regardless of status</p>
             </div>
             <div class="hidden md:flex items-center gap-4">
+                <a href="{{ route('admin.orders') }}" class="flex items-center gap-2 text-white/70 hover:text-amber-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    Active Orders
+                </a>
+                <span class="text-white/30">|</span>
                 <a href="{{ route('admin.orders.completed') }}" class="flex items-center gap-2 text-white/70 hover:text-green-400 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -63,7 +70,7 @@
             
             <!-- Search Bar -->
             <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                <form method="GET" action="{{ route('admin.orders') }}" class="flex flex-col sm:flex-row gap-4">
+                <form method="GET" action="{{ route('admin.orders.all') }}" class="flex flex-col sm:flex-row gap-4">
                     <div class="relative flex-1 max-w-md">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +93,7 @@
                             Search
                         </button>
                         @if(request('search'))
-                        <a href="{{ route('admin.orders') }}" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all flex items-center gap-2">
+                        <a href="{{ route('admin.orders.all') }}" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
@@ -160,7 +167,11 @@
                                 <p class="text-xs text-gray-400">{{ $order->created_at->format('H:i') }}</p>
                             </td>
                             <td class="py-4 px-6">
-                                <span class="text-lg font-bold text-red-600">₱{{ number_format($order->total, 2) }}</span>
+                                <span class="text-lg font-bold 
+                                    @if($order->status === 'completed') text-green-600
+                                    @elseif($order->status === 'cancelled') text-red-600
+                                    @else text-gray-800
+                                    @endif">₱{{ number_format($order->total, 2) }}</span>
                             </td>
                             <td class="py-4 px-6">
                                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
@@ -177,6 +188,10 @@
                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
                                     @elseif($order->status === 'delivering')
                                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"/></svg>
+                                    @elseif($order->status === 'cancelled')
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
                                     @endif
                                     {{ ucfirst($order->status) }}
                                 </span>
@@ -217,12 +232,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                     </svg>
                 </div>
-                <p class="text-gray-500 text-lg">No active orders found</p>
-                <p class="text-gray-400 text-sm mt-2">Completed orders can be found in the 
-                    <a href="{{ route('admin.orders.completed') }}" class="text-green-600 hover:text-green-700 font-medium">Completed Orders</a> dashboard.
-                    Cancelled orders can be found in the 
-                    <a href="{{ route('admin.orders.cancelled') }}" class="text-red-600 hover:text-red-700 font-medium">Cancelled Orders</a> dashboard.
-                </p>
+                <p class="text-gray-500 text-lg">No orders found</p>
+                <p class="text-gray-400 text-sm mt-2">Orders will appear here once they are created</p>
             </div>
             @endif
         </div>

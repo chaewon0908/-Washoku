@@ -75,6 +75,42 @@ class AdminController extends Controller
         return view('admin.completed-orders', compact('orders', 'search'));
     }
 
+    public function cancelledOrders(Request $request)
+    {
+        $search = $request->get('search', '');
+        
+        $query = Order::with('user', 'items');
+        
+        // Only show cancelled orders
+        $query->where('status', 'cancelled');
+        
+        // Add search functionality for order number
+        if ($search) {
+            $query->where('order_number', 'like', '%' . $search . '%');
+        }
+        
+        $orders = $query->latest()->paginate(20)->appends($request->query());
+        
+        return view('admin.cancelled-orders', compact('orders', 'search'));
+    }
+
+    public function allOrders(Request $request)
+    {
+        $search = $request->get('search', '');
+        
+        $query = Order::with('user', 'items');
+        
+        // Show all orders regardless of status
+        // Add search functionality for order number
+        if ($search) {
+            $query->where('order_number', 'like', '%' . $search . '%');
+        }
+        
+        $orders = $query->latest()->paginate(20)->appends($request->query());
+        
+        return view('admin.all-orders', compact('orders', 'search'));
+    }
+
     public function updateOrderStatus(Request $request, Order $order)
     {
         $request->validate([

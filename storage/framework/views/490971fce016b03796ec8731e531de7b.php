@@ -5,7 +5,7 @@
     <div class="container mx-auto px-4">
         <!-- Header Section -->
         <div class="text-center mb-12">
-            <h1 class="text-5xl md:text-6xl font-display font-bold text-primary-dark mb-4 relative inline-block reveal underline-animate">
+            <h1 class="text-5xl md:text-6xl font-english font-bold text-primary-dark mb-4 relative inline-block reveal underline-animate">
                 <span class="relative z-10">Find a Store</span>
                 <span class="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-red-400 via-red-500 to-red-600 opacity-20 rounded-full transform -skew-x-12"></span>
             </h1>
