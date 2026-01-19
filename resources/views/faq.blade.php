@@ -19,11 +19,11 @@
     
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center">
-            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4">Help Center</p>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-serif">
-                Frequently Asked <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Questions</span>
+            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Help Center</p>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-display reveal">
+                Frequently Asked <span class="gradient-text-animate">Questions</span>
             </h1>
-            <p class="text-white/60 text-lg max-w-2xl mx-auto">Find answers to common questions about our service.</p>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">Find answers to common questions about our service.</p>
         </div>
     </div>
 </section>
@@ -34,7 +34,7 @@
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-3xl mx-auto space-y-4">
+        <div class="max-w-3xl mx-auto space-y-4 stagger-children">
             @php
             $faqs = [
                 [

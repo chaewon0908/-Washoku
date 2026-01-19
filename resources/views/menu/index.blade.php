@@ -23,16 +23,16 @@
         <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
-            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4">Discover Our Cuisine</p>
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-serif">
-                Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Menu</span>
+            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Discover Our Cuisine</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-display reveal">
+                Our <span class="gradient-text-animate">Menu</span>
             </h1>
-            <div class="flex items-center justify-center gap-3 mb-6">
+            <div class="flex items-center justify-center gap-3 mb-6 reveal-scale" style="transition-delay: 200ms;">
                 <div class="h-[2px] w-16 bg-gradient-to-r from-transparent to-red-500"></div>
                 <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
                 <div class="h-[2px] w-16 bg-gradient-to-l from-transparent to-red-500"></div>
             </div>
-            <p class="text-white/60 text-lg max-w-2xl mx-auto">
+            <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 300ms;">
                 Authentic Japanese cuisine, crafted with passion and tradition
             </p>
         </div>
@@ -41,7 +41,7 @@
     <!-- Categories Grid -->
     <div class="container mx-auto px-4 py-16 relative z-10">
         @if($categories->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto stagger-children">
             @php
                 $categoryStyles = [
                     'Bento Boxes' => ['icon' => 'bento', 'color' => 'red'],
@@ -63,7 +63,7 @@
                 @endphp
                 @if($categorySlug)
                 <a href="{{ route('menu.category', $categorySlug) }}" class="group block">
-                    <div class="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 border border-gray-100 hover:border-red-200">
+                    <div class="tilt-card relative bg-white rounded-2xl shadow-lg card-shadow-hover overflow-hidden border border-gray-100 hover:border-red-200">
                         
                         <!-- Hover Background -->
                         <div class="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

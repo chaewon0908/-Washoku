@@ -19,11 +19,11 @@
     
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center">
-            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4">Get In Touch</p>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-serif">
-                Contact <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Us</span>
+            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Get In Touch</p>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-display reveal">
+                Contact <span class="gradient-text-animate">Us</span>
             </h1>
-            <p class="text-white/60 text-lg max-w-2xl mx-auto">Have questions? We'd love to hear from you.</p>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">Have questions? We'd love to hear from you.</p>
         </div>
     </div>
 </section>
@@ -34,10 +34,10 @@
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="container mx-auto px-4 relative z-10">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto stagger-children">
             
             <!-- Phone Card -->
-            <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 transform hover:-translate-y-2 relative overflow-hidden">
+            <div class="tilt-card group bg-white rounded-2xl p-8 shadow-lg card-shadow-hover border border-gray-100 hover:border-red-200 relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div class="relative z-10">
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Email Card -->
-            <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 transform hover:-translate-y-2 relative overflow-hidden">
+            <div class="tilt-card group bg-white rounded-2xl p-8 shadow-lg card-shadow-hover border border-gray-100 hover:border-red-200 relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div class="relative z-10">
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Hours Card -->
-            <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-red-200 transform hover:-translate-y-2 relative overflow-hidden md:col-span-2 lg:col-span-1">
+            <div class="tilt-card group bg-white rounded-2xl p-8 shadow-lg card-shadow-hover border border-gray-100 hover:border-red-200 relative overflow-hidden md:col-span-2 lg:col-span-1">
                 <div class="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div class="relative z-10">

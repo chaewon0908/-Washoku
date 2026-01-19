@@ -19,11 +19,11 @@
     
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center">
-            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4">Our Team</p>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-serif">
-                Meet the <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Developers</span>
+            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Our Team</p>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-display reveal">
+                Meet the <span class="gradient-text-animate">Developers</span>
             </h1>
-            <p class="text-white/60 text-lg max-w-2xl mx-auto">The talented team behind this project</p>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">The talented team behind this project</p>
         </div>
     </div>
 </section>
@@ -35,7 +35,7 @@
     <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="container mx-auto px-4 relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
             @php
             $developers = [
                 ['name' => 'Josh Matthew Almoite', 'role' => 'Full Stack Developer', 'icon' => '💻', 'image' => '/images/josh.png'],
@@ -46,7 +46,7 @@
             @endphp
             
             @foreach($developers as $developer)
-                <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 hover:border-red-200 relative">
+                <div class="tilt-card group bg-white rounded-2xl overflow-hidden shadow-lg card-shadow-hover border border-gray-100 hover:border-red-200 relative">
                     <!-- Dark hover overlay for entire card -->
                     <div class="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#2d1f1f] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     

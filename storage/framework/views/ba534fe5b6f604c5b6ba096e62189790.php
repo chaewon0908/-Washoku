@@ -202,7 +202,7 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
                     <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
-                        <span data-count-up="10" data-suffix="K+">0</span>K+
+                        <span data-count-up="10" data-suffix="K+">0K+</span>
                     </div>
                     <div class="text-white/60 font-medium">Happy Customers</div>
                     <div class="w-12 h-1 bg-gradient-to-r from-amber-400/50 to-transparent mx-auto mt-4 rounded-full group-hover:w-20 transition-all duration-500"></div>
@@ -212,7 +212,7 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
                     <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
-                        <span data-count-up="50" data-suffix="+">0</span>+
+                        <span data-count-up="50" data-suffix="+">0+</span>
                     </div>
                     <div class="text-white/60 font-medium">Menu Items</div>
                     <div class="w-12 h-1 bg-gradient-to-r from-amber-400/50 to-transparent mx-auto mt-4 rounded-full group-hover:w-20 transition-all duration-500"></div>
@@ -545,6 +545,8 @@
     </div>
 </section>
 <?php $__env->stopSection(); ?>
+
+
 
 
 

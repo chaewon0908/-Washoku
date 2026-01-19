@@ -5,17 +5,17 @@
     <div class="container mx-auto px-4">
         <!-- Header Section -->
         <div class="text-center mb-12">
-            <h1 class="text-5xl md:text-6xl font-serif font-bold text-primary-dark mb-4 relative inline-block">
+            <h1 class="text-5xl md:text-6xl font-display font-bold text-primary-dark mb-4 relative inline-block reveal underline-animate">
                 <span class="relative z-10">Find a Store</span>
                 <span class="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-red-400 via-red-500 to-red-600 opacity-20 rounded-full transform -skew-x-12"></span>
             </h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Visit us at one of our convenient locations</p>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">Visit us at one of our convenient locations</p>
         </div>
         
         <!-- Stores Grid -->
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-12">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-12 stagger-children">
             <!-- Manila Branch -->
-            <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 border-2 border-transparent hover:border-red-200">
+            <div class="tilt-card group relative bg-white rounded-3xl shadow-lg card-shadow-hover overflow-hidden border-2 border-transparent hover:border-red-200">
                 <!-- Gradient Background Overlay -->
                 <div class="absolute inset-0 bg-gradient-to-br from-red-400 to-orange-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
                 
@@ -70,7 +70,7 @@
             </div>
             
             <!-- Quezon City Branch -->
-            <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 border-2 border-transparent hover:border-red-200">
+            <div class="tilt-card group relative bg-white rounded-3xl shadow-lg card-shadow-hover overflow-hidden border-2 border-transparent hover:border-red-200">
                 <!-- Gradient Background Overlay -->
                 <div class="absolute inset-0 bg-gradient-to-br from-red-400 to-orange-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
                 

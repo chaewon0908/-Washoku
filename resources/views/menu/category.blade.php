@@ -40,9 +40,9 @@
             
             <!-- Category Header -->
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-serif">{{ $category->name }}</h1>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-display reveal">{{ $category->name }}</h1>
                 @if($category->description)
-                    <p class="text-white/60 text-lg max-w-2xl mx-auto">{{ $category->description }}</p>
+                    <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">{{ $category->description }}</p>
                 @endif
             </div>
         </div>
@@ -114,7 +114,7 @@
 
             <!-- Menu Items Grid -->
             @if($items->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 stagger-children">
                     @foreach($items as $item)
                     <div 
                         x-show="filterItems(@js([
@@ -137,7 +137,7 @@
                             'is_bestseller' => $item->is_bestseller ?? false,
                             'is_custom_bento' => $item->name === 'Custom Bento Box (4 compartments)'
                         ]))"
-                        class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 border border-gray-100 hover:border-red-200">
+                        class="tilt-card group bg-white rounded-2xl shadow-lg overflow-hidden card-shadow-hover cursor-pointer border border-gray-100 hover:border-red-200">
                         
                         <!-- Image Section -->
                         <div class="relative overflow-hidden h-56">
