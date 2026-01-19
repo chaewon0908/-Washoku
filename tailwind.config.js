@@ -19,6 +19,7 @@ export default {
             fontFamily: {
                 'sans': ['Noto Sans JP', 'sans-serif'],
                 'serif': ['Noto Serif JP', 'serif'],
+                'display': ['Shippori Mincho', 'serif'],
             },
         },
     },

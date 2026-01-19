@@ -10,10 +10,10 @@
     <?php endif; ?>
     <title><?php echo $__env->yieldContent('title', 'Washoku'); ?> - Japanese Restaurant</title>
     
-    <!-- Fonts -->
+    <!-- Fonts - Added Shippori Mincho for distinctive Japanese aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Vite CSS & JS -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
@@ -28,6 +28,16 @@
     </main>
     
     <?php echo $__env->make('partials.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    
+    <!-- Back to Top Button -->
+    <button 
+        id="backToTop" 
+        class="back-to-top"
+        aria-label="Back to top">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
     
     <!-- Toast Notification -->
     <div x-data="toastNotification()" 
@@ -99,6 +109,125 @@
             }
         }
     }
+    </script>
+    
+    <!-- Scroll Reveal & Count-Up Animation Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ============================================
+        // SCROLL REVEAL ANIMATION
+        // ============================================
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // ============================================
+        // COUNT-UP ANIMATION
+        // ============================================
+        const countUpElements = document.querySelectorAll('[data-count-up]');
+        
+        const countUp = (element, target, suffix = '', duration = 2000) => {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const updateCount = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current) + suffix;
+                    requestAnimationFrame(updateCount);
+                } else {
+                    element.textContent = target + suffix;
+                }
+            };
+            
+            updateCount();
+        };
+        
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    const target = parseInt(entry.target.dataset.countUp);
+                    const suffix = entry.target.dataset.suffix || '';
+                    countUp(entry.target, target, suffix);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        countUpElements.forEach(el => countObserver.observe(el));
+        
+        // ============================================
+        // BACK TO TOP BUTTON
+        // ============================================
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // ============================================
+        // 3D TILT EFFECT FOR CARDS
+        // ============================================
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.setProperty('--rotateX', `${rotateX}deg`);
+                card.style.setProperty('--rotateY', `${rotateY}deg`);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--rotateX', '0deg');
+                card.style.setProperty('--rotateY', '0deg');
+            });
+        });
+        
+        // ============================================
+        // PARALLAX EFFECT
+        // ============================================
+        const parallaxElements = document.querySelectorAll('.parallax-slow');
+        
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.dataset.speed) || 0.5;
+                el.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+    });
     </script>
     
     <?php echo $__env->yieldPushContent('scripts'); ?>

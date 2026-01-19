@@ -239,3 +239,316 @@
         animation: none;
     }
 }
+
+/* ============================================
+   SCROLL ANIMATIONS - Reveal on Scroll
+   ============================================ */
+
+/* Base state for scroll animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered children animations */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-children.active > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children.active > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-children.active > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-children.active > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-children.active > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-children.active > *:nth-child(6) { transition-delay: 400ms; }
+
+.stagger-children.active > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide from left */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale reveal */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+   COUNT-UP ANIMATION
+   ============================================ */
+
+.count-up {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   3D TILT EFFECT FOR CARDS
+   ============================================ */
+
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+}
+
+.tilt-card:hover {
+    transform: perspective(1000px) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg)) scale(1.02);
+}
+
+.tilt-card-inner {
+    transform: translateZ(20px);
+}
+
+/* ============================================
+   FLOATING BACK TO TOP BUTTON
+   ============================================ */
+
+.back-to-top {
+    @apply fixed bottom-8 right-8 z-50;
+    @apply w-14 h-14 rounded-full;
+    @apply bg-gradient-to-br from-red-600 to-red-700;
+    @apply shadow-lg shadow-red-900/30;
+    @apply flex items-center justify-center;
+    @apply opacity-0 translate-y-10 pointer-events-none;
+    @apply transition-all duration-500 ease-out;
+    @apply border border-red-500/30;
+    @apply hover:from-red-500 hover:to-red-600 hover:scale-110;
+    @apply hover:shadow-xl hover:shadow-red-600/40;
+}
+
+.back-to-top.visible {
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+}
+
+.back-to-top::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    @apply bg-gradient-to-r from-white/0 via-white/20 to-white/0;
+    @apply -translate-x-full;
+    transition: transform 0.6s ease;
+}
+
+.back-to-top:hover::before {
+    @apply translate-x-full;
+}
+
+/* ============================================
+   JAPANESE WAVE SECTION DIVIDER
+   ============================================ */
+
+.wave-divider {
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+}
+
+.wave-divider svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wave-divider-top svg {
+    top: 0;
+    bottom: auto;
+    transform: rotate(180deg);
+}
+
+/* ============================================
+   SHIMMER LOADING EFFECT
+   ============================================ */
+
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ============================================
+   GRADIENT TEXT ANIMATION
+   ============================================ */
+
+.gradient-text-animate {
+    background: linear-gradient(
+        90deg,
+        #fbbf24,
+        #f59e0b,
+        #dc2626,
+        #f59e0b,
+        #fbbf24
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 3s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* ============================================
+   FLOATING ANIMATION
+   ============================================ */
+
+.float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ============================================
+   PARALLAX ELEMENTS
+   ============================================ */
+
+.parallax-slow {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow-red {
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.3), 0 0 60px rgba(220, 38, 38, 0.1);
+}
+
+.glow-amber {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3), 0 0 60px rgba(251, 191, 36, 0.1);
+}
+
+/* ============================================
+   SCROLL INDICATOR
+   ============================================ */
+
+.scroll-indicator {
+    @apply absolute bottom-8 left-1/2 -translate-x-1/2;
+    @apply flex flex-col items-center gap-2;
+    @apply text-white/60;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+.scroll-indicator-line {
+    @apply w-px h-12 bg-gradient-to-b from-white/40 to-transparent;
+}
+
+/* ============================================
+   ENHANCED CARD SHADOWS
+   ============================================ */
+
+.card-shadow-hover {
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.card-shadow-hover:hover {
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(220, 38, 38, 0.1);
+}
+
+/* ============================================
+   PULSE GLOW ANIMATION
+   ============================================ */
+
+.pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), 0 0 60px rgba(251, 191, 36, 0.3);
+    }
+}
+
+/* ============================================
+   UNDERLINE ANIMATION
+   ============================================ */
+
+.underline-animate {
+    position: relative;
+}
+
+.underline-animate::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #dc2626, #fbbf24);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.underline-animate:hover::after {
+    width: 100%;
+}
