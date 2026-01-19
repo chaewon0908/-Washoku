@@ -37,10 +37,42 @@ class AdminController extends Controller
         return view('admin.index', compact('stats', 'recentOrders'));
     }
 
-    public function orders()
+    public function orders(Request $request)
     {
-        $orders = Order::with('user', 'items')->latest()->paginate(20);
-        return view('admin.orders', compact('orders'));
+        $search = $request->get('search', '');
+        
+        $query = Order::with('user', 'items');
+        
+        // Exclude completed and cancelled orders - they go to their own dashboard
+        $query->whereNotIn('status', ['completed', 'cancelled']);
+        
+        // Add search functionality for order number
+        if ($search) {
+            $query->where('order_number', 'like', '%' . $search . '%');
+        }
+        
+        $orders = $query->latest()->paginate(20)->appends($request->query());
+        
+        return view('admin.orders', compact('orders', 'search'));
+    }
+
+    public function completedOrders(Request $request)
+    {
+        $search = $request->get('search', '');
+        
+        $query = Order::with('user', 'items');
+        
+        // Only show completed orders
+        $query->where('status', 'completed');
+        
+        // Add search functionality for order number
+        if ($search) {
+            $query->where('order_number', 'like', '%' . $search . '%');
+        }
+        
+        $orders = $query->latest()->paginate(20)->appends($request->query());
+        
+        return view('admin.completed-orders', compact('orders', 'search'));
     }
 
     public function updateOrderStatus(Request $request, Order $order)
