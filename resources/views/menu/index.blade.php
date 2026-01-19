@@ -24,7 +24,7 @@
         
         <div class="container mx-auto px-4 relative z-10 text-center">
             <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Discover Our Cuisine</p>
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-display reveal">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-english reveal">
                 Our <span class="gradient-text-animate">Menu</span>
             </h1>
             <div class="flex items-center justify-center gap-3 mb-6 reveal-scale" style="transition-delay: 200ms;">

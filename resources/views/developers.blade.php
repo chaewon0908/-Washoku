@@ -20,7 +20,7 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center">
             <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-4 reveal-scale">Our Team</p>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-display reveal">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-english reveal">
                 Meet the <span class="gradient-text-animate">Developers</span>
             </h1>
             <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">The talented team behind this project</p>

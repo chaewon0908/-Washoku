@@ -11,6 +11,22 @@
     --primary-light: #fee2e2;
 }
 
+/* Playfair Display as Main Font */
+body {
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Ensure all text elements inherit Playfair Display */
+p, span, div, h1, h2, h3, h4, h5, h6, a, button, input, textarea, select, label, li, td, th {
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Japanese characters use specific font */
+.font-japanese,
+[lang="ja"] {
+    font-family: 'Sawarabi Mincho', 'Noto Serif JP', serif !important;
+}
+
 .bg-warm-cream {
     background-color: var(--warm-cream);
 }

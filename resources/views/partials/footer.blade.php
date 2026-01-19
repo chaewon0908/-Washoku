@@ -42,7 +42,9 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">和食 Washoku</span>
+                        <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
+                            <span class="font-japanese">和食</span> <span class="font-english">Washoku</span>
+                        </span>
                     </div>
                 </div>
                 <p class="text-sm text-white/70 leading-relaxed mb-6">

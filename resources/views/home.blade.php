@@ -34,7 +34,7 @@
                     <span class="text-amber-400 text-lg">🍱</span>
                     <span class="text-white/90 text-sm font-medium tracking-wide">Premium Japanese Cuisine</span>
                 </div>
-                <h1 class="text-6xl md:text-8xl font-bold font-display text-white mb-6 leading-tight reveal" style="transition-delay: 200ms;">
+                <h1 class="text-6xl md:text-8xl font-bold font-english text-white mb-6 leading-tight reveal" style="transition-delay: 200ms;">
                     PREMIUM <span class="gradient-text-animate">BENTO</span>
                 </h1>
                 <p class="text-white/70 text-center text-xl md:text-2xl mb-8 max-w-3xl mx-auto reveal" style="transition-delay: 300ms;">
@@ -201,7 +201,7 @@
             <div class="text-center group relative">
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
-                    <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
+                    <div class="text-4xl md:text-5xl font-bold font-english text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
                         <span data-count-up="10" data-suffix="K+">0K+</span>
                     </div>
                     <div class="text-white/60 font-medium">Happy Customers</div>
@@ -211,7 +211,7 @@
             <div class="text-center group relative">
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
-                    <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
+                    <div class="text-4xl md:text-5xl font-bold font-english text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
                         <span data-count-up="50" data-suffix="+">0+</span>
                     </div>
                     <div class="text-white/60 font-medium">Menu Items</div>
@@ -221,7 +221,7 @@
             <div class="text-center group relative">
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
-                    <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
+                    <div class="text-4xl md:text-5xl font-bold font-english text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">
                         4.9<svg class="w-8 h-8 inline-block text-amber-400 -mt-2 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     </div>
                     <div class="text-white/60 font-medium">Average Rating</div>
@@ -231,7 +231,7 @@
             <div class="text-center group relative">
                 <div class="absolute inset-0 bg-gradient-to-b from-amber-400/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative p-6">
-                    <div class="text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">24/7</div>
+                    <div class="text-4xl md:text-5xl font-bold font-english text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300 mb-2 group-hover:scale-110 transition-transform">24/7</div>
                     <div class="text-white/60 font-medium">Order Support</div>
                     <div class="w-12 h-1 bg-gradient-to-r from-amber-400/50 to-transparent mx-auto mt-4 rounded-full group-hover:w-20 transition-all duration-500"></div>
                 </div>
@@ -258,7 +258,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4 reveal">
             <div>
                 <p class="text-red-600 font-semibold text-sm tracking-wider uppercase mb-3">Our Menu</p>
-                <h2 class="text-4xl md:text-5xl font-bold font-display text-gray-800 underline-animate inline-block">Featured Categories</h2>
+                <h2 class="text-4xl md:text-5xl font-bold font-english text-gray-800 underline-animate inline-block">Featured Categories</h2>
                 <p class="text-gray-500 mt-3">Explore our diverse selection of authentic Japanese dishes</p>
             </div>
             <a href="/menu" class="group inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-semibold px-6 py-3 rounded-full transition-all shadow-lg hover:shadow-xl hover:scale-105 glow-red">
@@ -337,7 +337,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4 reveal">
             <div>
                 <p class="text-red-600 font-semibold text-sm tracking-wider uppercase mb-3">Best Sellers</p>
-                <h2 class="text-4xl md:text-5xl font-bold font-display text-gray-800 underline-animate inline-block">Customer Favorites</h2>
+                <h2 class="text-4xl md:text-5xl font-bold font-english text-gray-800 underline-animate inline-block">Customer Favorites</h2>
                 <p class="text-gray-500 mt-3">Most loved dishes by our customers</p>
             </div>
             <a href="/menu" class="group inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-semibold px-6 py-3 rounded-full transition-all shadow-lg hover:shadow-xl hover:scale-105 glow-red">
@@ -470,8 +470,8 @@
             <!-- Content -->
             <div class="reveal-right">
                 <p class="text-red-600 font-semibold text-sm tracking-wider uppercase mb-3">Since 2020</p>
-                <h2 class="text-4xl md:text-5xl font-bold font-display text-gray-800 mb-4">
-                    <span class="gradient-text-animate">和食</span> Washoku
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    <span class="font-japanese gradient-text-animate">和食</span> <span class="font-english">Washoku</span>
                 </h2>
                 <h3 class="text-xl font-semibold text-gray-600 mb-6">
                     Authentic Japanese Restaurant
@@ -542,6 +542,7 @@
     </div>
 </section>
 @endsection
+
 
 
 

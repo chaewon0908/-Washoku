@@ -64,8 +64,8 @@
                 <!-- Brand Text -->
                 <div class="group-hover:translate-x-1 transition-transform duration-300">
                     <div class="flex items-center gap-2">
-                        <span class="text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-amber-100 drop-shadow-lg japanese-text-glow">和食</span>
-                        <span class="text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">Washoku</span>
+                        <span class="text-3xl font-bold font-japanese tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-amber-100 drop-shadow-lg japanese-text-glow">和食</span>
+                        <span class="text-2xl font-bold font-english tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">Washoku</span>
                     </div>
                     <div class="flex items-center gap-2 mt-0.5">
                         <span class="text-[10px] text-amber-400/80 tracking-[0.2em] uppercase font-medium">Japanese Restaurant</span>

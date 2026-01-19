@@ -20,7 +20,7 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="text-center">
             <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Your Selection</p>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-display reveal">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-english reveal">
                 Shopping <span class="gradient-text-animate">Cart</span>
             </h1>
         </div>

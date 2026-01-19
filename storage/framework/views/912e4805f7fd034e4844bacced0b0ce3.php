@@ -10,17 +10,17 @@
     <?php endif; ?>
     <title><?php echo $__env->yieldContent('title', 'Washoku'); ?> - Japanese Restaurant</title>
     
-    <!-- Fonts - Added Shippori Mincho for distinctive Japanese aesthetic -->
+    <!-- Fonts - Japanese Restaurant Aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Vite CSS & JS -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
-<body class="bg-warm-cream font-sans" x-data>
+<body class="bg-warm-cream font-sans" x-data style="font-family: 'Playfair Display', Georgia, serif;">
     <?php echo $__env->make('partials.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     
     <main>

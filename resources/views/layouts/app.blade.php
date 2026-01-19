@@ -10,17 +10,17 @@
     @endif
     <title>@yield('title', 'Washoku') - Japanese Restaurant</title>
     
-    <!-- Fonts - Added Shippori Mincho for distinctive Japanese aesthetic -->
+    <!-- Fonts - Japanese Restaurant Aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Vite CSS & JS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @stack('styles')
 </head>
-<body class="bg-warm-cream font-sans" x-data>
+<body class="bg-warm-cream font-sans" x-data style="font-family: 'Playfair Display', Georgia, serif;">
     @include('partials.header')
     
     <main>

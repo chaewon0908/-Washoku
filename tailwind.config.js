@@ -17,9 +17,11 @@ export default {
                 },
             },
             fontFamily: {
-                'sans': ['Noto Sans JP', 'sans-serif'],
-                'serif': ['Noto Serif JP', 'serif'],
-                'display': ['Shippori Mincho', 'serif'],
+                'sans': ['Playfair Display', 'Georgia', 'serif'], // Main font for everything
+                'serif': ['Playfair Display', 'Georgia', 'serif'],
+                'display': ['Playfair Display', 'serif'], // Elegant headings
+                'japanese': ['Sawarabi Mincho', 'Noto Serif JP', 'serif'], // For Japanese characters only
+                'english': ['Playfair Display', 'Georgia', 'serif'], // English text
             },
         },
     },
