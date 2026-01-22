@@ -223,7 +223,7 @@ p, span, div, h1, h2, h3, h4, h5, h6, a, button, input, textarea, select, label,
 
 /* Navigation Link Styles */
 .nav-link {
-    @apply relative py-2.5 px-4 rounded-lg font-semibold text-white/80 transition-all duration-300;
+    @apply relative py-1.5 sm:py-2 md:py-2.5 px-2 sm:px-3 md:px-4 rounded-lg font-semibold text-white/80 transition-all duration-300;
 }
 
 .nav-link:hover {

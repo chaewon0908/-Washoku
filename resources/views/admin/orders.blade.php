@@ -5,47 +5,48 @@
 @section('content')
 
 <!-- Hero Section - Dark Theme -->
-<section class="relative bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] py-12 overflow-hidden">
+<section class="relative bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] py-8 sm:py-10 md:py-12 overflow-hidden">
     <!-- Seigaiha Pattern -->
     <div class="absolute inset-0 opacity-[0.05] seigaiha-pattern"></div>
     
-    <!-- Decorative Glows -->
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl"></div>
+    <!-- Decorative Glows - Responsive -->
+    <div class="absolute top-0 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-red-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 bg-amber-400/10 rounded-full blur-3xl"></div>
     
     <!-- Gold Accent Lines -->
     <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/50 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
     
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="flex justify-between items-center">
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
             <div>
-                <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 reveal-scale">Admin Panel</p>
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-english reveal">
+                <p class="text-amber-400/80 text-xs sm:text-sm font-medium tracking-widest uppercase mb-2 sm:mb-3 reveal-scale">Admin Panel</p>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3 font-english reveal">
                     Manage <span class="gradient-text-animate">Orders</span>
                 </h1>
-                <p class="text-white/60 text-lg reveal" style="transition-delay: 200ms;">View and update active orders status</p>
+                <p class="text-white/60 text-base sm:text-lg reveal px-2 md:px-0" style="transition-delay: 200ms;">View and update active orders status</p>
             </div>
-            <div class="hidden md:flex items-center gap-4">
-                <a href="{{ route('admin.orders.completed') }}" class="flex items-center gap-2 text-white/70 hover:text-green-400 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Navigation Links - Responsive -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 md:gap-4 mt-4 md:mt-0">
+                <a href="{{ route('admin.orders.completed') }}" class="flex items-center gap-1.5 sm:gap-2 text-white/70 hover:text-green-400 transition-colors text-sm sm:text-base">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    Completed Orders
+                    <span class="whitespace-nowrap">Completed Orders</span>
                 </a>
-                <span class="text-white/30">|</span>
-                <a href="{{ route('admin.orders.cancelled') }}" class="flex items-center gap-2 text-white/70 hover:text-red-400 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span class="text-white/30 hidden sm:inline">|</span>
+                <a href="{{ route('admin.orders.cancelled') }}" class="flex items-center gap-1.5 sm:gap-2 text-white/70 hover:text-red-400 transition-colors text-sm sm:text-base">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
-                    Cancelled Orders
+                    <span class="whitespace-nowrap">Cancelled Orders</span>
                 </a>
-                <span class="text-white/30">|</span>
-                <a href="{{ route('admin.index') }}" class="flex items-center gap-2 text-white/70 hover:text-amber-400 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span class="text-white/30 hidden sm:inline">|</span>
+                <a href="{{ route('admin.index') }}" class="flex items-center gap-1.5 sm:gap-2 text-white/70 hover:text-amber-400 transition-colors text-sm sm:text-base">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    Back to Admin Panel
+                    <span class="whitespace-nowrap">Back to Admin Panel</span>
                 </a>
             </div>
         </div>
@@ -53,20 +54,20 @@
 </section>
 
 <!-- Main Content -->
-<section class="bg-gradient-to-br from-[#f8f5f0] via-[#f5f1e8] to-[#ebe5d9] py-12 relative overflow-hidden min-h-screen">
-    <!-- Background Decorations -->
-    <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-red-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+<section class="bg-gradient-to-br from-[#f8f5f0] via-[#f5f1e8] to-[#ebe5d9] py-8 sm:py-10 md:py-12 relative overflow-hidden min-h-screen">
+    <!-- Background Decorations - Responsive -->
+    <div class="absolute top-0 right-0 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] bg-red-100/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-[150px] h-[150px] sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] bg-amber-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
     
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 reveal" x-data="{ searchQuery: '{{ request('search') }}' }">
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden border border-gray-100 reveal" x-data="{ searchQuery: '{{ request('search') }}' }">
             
             <!-- Search Bar -->
-            <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                <form method="GET" action="{{ route('admin.orders') }}" class="flex flex-col sm:flex-row gap-4">
+            <div class="p-4 sm:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+                <form method="GET" action="{{ route('admin.orders') }}" class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <div class="relative flex-1 max-w-md">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
@@ -74,29 +75,30 @@
                             type="text" 
                             name="search" 
                             value="{{ request('search') }}"
-                            placeholder="Search by Order # (e.g., ORD-F2MP9CRB)" 
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-gray-700 placeholder-gray-400"
+                            placeholder="Search by Order #" 
+                            class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-sm sm:text-base text-gray-700 placeholder-gray-400"
                         >
                     </div>
                     <div class="flex gap-2">
-                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button type="submit" class="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white text-sm sm:text-base font-semibold rounded-lg sm:rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center gap-1.5 sm:gap-2">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
-                            Search
+                            <span class="hidden sm:inline">Search</span>
+                            <span class="sm:hidden">Search</span>
                         </button>
                         @if(request('search'))
-                        <a href="{{ route('admin.orders') }}" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('admin.orders') }}" class="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm sm:text-base font-semibold rounded-lg sm:rounded-xl transition-all flex items-center gap-1.5 sm:gap-2">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
-                            Clear
+                            <span class="hidden sm:inline">Clear</span>
                         </a>
                         @endif
                     </div>
                 </form>
                 @if(request('search'))
-                <p class="mt-3 text-sm text-gray-500">
+                <p class="mt-3 text-xs sm:text-sm text-gray-500">
                     Showing results for: <span class="font-semibold text-gray-700">"{{ request('search') }}"</span>
                     <span class="ml-2">({{ $orders->total() }} {{ Str::plural('order', $orders->total()) }} found)</span>
                 </p>
@@ -114,56 +116,56 @@
 
             @if($orders->count() > 0)
             <div class="overflow-x-auto">
-                <table class="w-full">
+                <table class="w-full min-w-[800px]">
                     <thead>
                         <tr class="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Order #</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Customer</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Items</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Date</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Total</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Status</th>
-                            <th class="text-left py-4 px-6 font-semibold font-english text-gray-700 text-sm uppercase tracking-wider">Actions</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider">Order #</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider">Customer</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider hidden md:table-cell">Items</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider hidden lg:table-cell">Date</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider">Total</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider">Status</th>
+                            <th class="text-left py-3 sm:py-4 px-3 sm:px-6 font-semibold font-english text-gray-700 text-xs sm:text-sm uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @foreach($orders as $order)
                         <tr class="hover:bg-gradient-to-r hover:from-gray-50/50 hover:to-white/50 transition-all duration-200 reveal-scale" style="transition-delay: {{ $loop->index * 30 }}ms;">
-                            <td class="py-4 px-6">
-                                <span class="font-bold text-gray-800">{{ $order->order_number }}</span>
+                            <td class="py-3 sm:py-4 px-3 sm:px-6">
+                                <span class="font-bold text-xs sm:text-sm text-gray-800">{{ $order->order_number }}</span>
                             </td>
-                            <td class="py-4 px-6">
+                            <td class="py-3 sm:py-4 px-3 sm:px-6">
                                 <div>
-                                    <p class="font-semibold text-gray-800">{{ $order->customer_name ?? ($order->user->name ?? 'Guest') }}</p>
+                                    <p class="font-semibold text-xs sm:text-sm text-gray-800">{{ $order->customer_name ?? ($order->user->name ?? 'Guest') }}</p>
                                     @if($order->customer_email)
-                                    <p class="text-xs text-gray-500">{{ $order->customer_email }}</p>
+                                    <p class="text-[10px] sm:text-xs text-gray-500">{{ $order->customer_email }}</p>
                                     @endif
                                     @if($order->customer_phone)
-                                    <p class="text-xs text-gray-500">{{ $order->customer_phone }}</p>
+                                    <p class="text-[10px] sm:text-xs text-gray-500">{{ $order->customer_phone }}</p>
                                     @endif
                                     @if($order->delivery_address)
-                                    <p class="text-xs text-gray-500 mt-1">{{ \Illuminate\Support\Str::limit($order->delivery_address, 30) }}</p>
+                                    <p class="text-[10px] sm:text-xs text-gray-500 mt-1">{{ \Illuminate\Support\Str::limit($order->delivery_address, 30) }}</p>
                                     @endif
                                 </div>
                             </td>
-                            <td class="py-4 px-6">
+                            <td class="py-3 sm:py-4 px-3 sm:px-6 hidden md:table-cell">
                                 <div class="space-y-1 max-w-[200px]">
                                     @foreach($order->items as $item)
-                                    <p class="text-sm text-gray-600">
+                                    <p class="text-xs sm:text-sm text-gray-600">
                                         <span class="font-medium text-gray-800">{{ $item->quantity }}x</span> {{ $item->item_name }}
                                     </p>
                                     @endforeach
                                 </div>
                             </td>
-                            <td class="py-4 px-6">
-                                <p class="text-sm text-gray-600">{{ $order->created_at->format('M d, Y') }}</p>
-                                <p class="text-xs text-gray-400">{{ $order->created_at->format('H:i') }}</p>
+                            <td class="py-3 sm:py-4 px-3 sm:px-6 hidden lg:table-cell">
+                                <p class="text-xs sm:text-sm text-gray-600">{{ $order->created_at->format('M d, Y') }}</p>
+                                <p class="text-[10px] sm:text-xs text-gray-400">{{ $order->created_at->format('H:i') }}</p>
                             </td>
-                            <td class="py-4 px-6">
-                                <span class="text-lg font-bold text-red-600">₱{{ number_format($order->total, 2) }}</span>
+                            <td class="py-3 sm:py-4 px-3 sm:px-6">
+                                <span class="text-sm sm:text-lg font-bold text-red-600">₱{{ number_format($order->total, 2) }}</span>
                             </td>
-                            <td class="py-4 px-6">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+                            <td class="py-3 sm:py-4 px-3 sm:px-6">
+                                <span class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold shadow-sm
                                     @if($order->status === 'pending') bg-gradient-to-r from-amber-100 to-amber-50 text-amber-700 border border-amber-200
                                     @elseif($order->status === 'confirmed') bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 border border-blue-200
                                     @elseif($order->status === 'preparing') bg-gradient-to-r from-purple-100 to-purple-50 text-purple-700 border border-purple-200
@@ -181,10 +183,10 @@
                                     {{ ucfirst($order->status) }}
                                 </span>
                             </td>
-                            <td class="py-4 px-6">
+                            <td class="py-3 sm:py-4 px-3 sm:px-6">
                                 <form method="POST" action="{{ route('admin.orders.update-status', $order) }}" class="inline-block">
                                     @csrf
-                                    <select name="status" onchange="this.form.submit()" class="px-3 py-2 text-sm font-semibold rounded-lg border-2 transition-all duration-200 shadow-sm hover:shadow-md
+                                    <select name="status" onchange="this.form.submit()" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-lg sm:rounded-lg border-2 transition-all duration-200 shadow-sm hover:shadow-md
                                         @if($order->status === 'pending') bg-gradient-to-r from-amber-50 to-amber-100/50 text-amber-700 border-amber-300 hover:border-amber-400
                                         @elseif($order->status === 'confirmed') bg-gradient-to-r from-blue-50 to-blue-100/50 text-blue-700 border-blue-300 hover:border-blue-400
                                         @elseif($order->status === 'preparing') bg-gradient-to-r from-purple-50 to-purple-100/50 text-purple-700 border-purple-300 hover:border-purple-400
@@ -207,18 +209,18 @@
                 </table>
             </div>
 
-            <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <div class="px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border-t border-gray-100">
                 {{ $orders->links() }}
             </div>
             @else
-            <div class="text-center py-16">
-                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="text-center py-10 sm:py-12 md:py-16">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                     </svg>
                 </div>
-                <p class="text-gray-500 text-lg">No active orders found</p>
-                <p class="text-gray-400 text-sm mt-2">Completed orders can be found in the 
+                <p class="text-gray-500 text-base sm:text-lg">No active orders found</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2 px-4">Completed orders can be found in the 
                     <a href="{{ route('admin.orders.completed') }}" class="text-green-600 hover:text-green-700 font-medium">Completed Orders</a> dashboard.
                     Cancelled orders can be found in the 
                     <a href="{{ route('admin.orders.cancelled') }}" class="text-red-600 hover:text-red-700 font-medium">Cancelled Orders</a> dashboard.
