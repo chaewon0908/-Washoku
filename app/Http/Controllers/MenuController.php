@@ -35,8 +35,8 @@ class MenuController extends Controller
             return $this->categoryImages[$categorySlug];
         }
         
-        // Otherwise, use the image_url from database
-        return $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=' . urlencode($item->name);
+        // Otherwise, use the image_url from database or generate asset URL for uploaded images
+        return $item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=' . urlencode($item->name));
     }
 
     public function index()

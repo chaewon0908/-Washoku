@@ -132,7 +132,7 @@
                             'name' => $item->name,
                             'description' => $item->description,
                             'price' => $item->price,
-                            'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
+                            'image' => $item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'),
                             'is_featured' => $item->is_featured ?? false,
                             'is_bestseller' => $item->is_bestseller ?? false,
                             'is_custom_bento' => $item->name === 'Custom Bento Box (4 compartments)'
@@ -142,7 +142,7 @@
                         <!-- Image Section -->
                         <div class="relative overflow-hidden h-56">
                             <img 
-                                src="{{ $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food' }}" 
+                                src="{{ $item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food') }}" 
                                 alt="{{ $item->name }}"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food';">
