@@ -38,9 +38,9 @@
             
             <!-- Category Header -->
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-serif"><?php echo e($category->name); ?></h1>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 font-english reveal"><?php echo e($category->name); ?></h1>
                 <?php if($category->description): ?>
-                    <p class="text-white/60 text-lg max-w-2xl mx-auto"><?php echo e($category->description); ?></p>
+                    <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 200ms;"><?php echo e($category->description); ?></p>
                 <?php endif; ?>
             </div>
         </div>
@@ -112,7 +112,7 @@
 
             <!-- Menu Items Grid -->
             <?php if($items->count() > 0): ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 stagger-children">
                     <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div 
                         x-show="filterItems(<?php echo \Illuminate\Support\Js::from([
@@ -130,17 +130,18 @@
                             'name' => $item->name,
                             'description' => $item->description,
                             'price' => $item->price,
-                            'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
+                            'calories' => $item->calories,
+                            'image' => $item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'),
                             'is_featured' => $item->is_featured ?? false,
                             'is_bestseller' => $item->is_bestseller ?? false,
                             'is_custom_bento' => $item->name === 'Custom Bento Box (4 compartments)'
                         ])->toHtml() ?>)"
-                        class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 border border-gray-100 hover:border-red-200">
+                        class="tilt-card group bg-white rounded-2xl shadow-lg overflow-hidden card-shadow-hover cursor-pointer border border-gray-100 hover:border-red-200">
                         
                         <!-- Image Section -->
                         <div class="relative overflow-hidden h-56">
                             <img 
-                                src="<?php echo e($item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'); ?>" 
+                                src="<?php echo e($item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food')); ?>" 
                                 alt="<?php echo e($item->name); ?>"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food';">
@@ -172,7 +173,13 @@
                         <div class="p-5">
                             <h3 class="text-lg font-bold text-gray-800 group-hover:text-red-600 mb-2 transition-colors line-clamp-1"><?php echo e($item->name); ?></h3>
                             <?php if($item->description): ?>
-                                <p class="text-gray-500 text-sm mb-4 line-clamp-2"><?php echo e(\Illuminate\Support\Str::limit($item->description, 60)); ?></p>
+                                <p class="text-gray-500 text-sm mb-2 line-clamp-2"><?php echo e(\Illuminate\Support\Str::limit($item->description, 60)); ?></p>
+                            <?php endif; ?>
+                            <?php if($item->calories): ?>
+                                <p class="text-xs text-amber-700 font-semibold mb-3 flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+                                    <?php echo e(number_format($item->calories)); ?> kcal
+                                </p>
                             <?php endif; ?>
                             <div class="flex items-center justify-between">
                                 <span class="text-2xl font-bold text-red-600">₱<?php echo e(number_format($item->price, 0)); ?></span>
@@ -268,9 +275,12 @@
                 <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4" x-text="selectedItem?.name"></h2>
                 
                 <!-- Price -->
-                <div class="flex items-center gap-3 mb-6">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
                     <span class="text-3xl font-bold text-red-600" x-text="'₱' + (selectedItem?.price ? Number(selectedItem.price).toFixed(0) : '0')"></span>
                     <span class="text-gray-400 text-sm bg-gray-100 px-3 py-1 rounded-full">per serving</span>
+                    <template x-if="selectedItem?.calories">
+                        <span class="text-amber-700 text-sm font-semibold bg-amber-50 border border-amber-200 px-3 py-1 rounded-full" x-text="Number(selectedItem.calories).toLocaleString() + ' kcal'"></span>
+                    </template>
                 </div>
                 
                 <!-- Description -->
@@ -321,6 +331,7 @@ $menuItemsJson = $items->map(function($item) {
         'name' => $item->name,
         'description' => $item->description,
         'price' => $item->price,
+        'calories' => $item->calories,
         'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
         'is_featured' => $item->is_featured ?? false,
         'is_bestseller' => $item->is_bestseller ?? false,

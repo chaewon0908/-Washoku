@@ -121,7 +121,9 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
+    Route::get('/orders/all', [AdminController::class, 'allOrders'])->name('orders.all');
     Route::get('/orders/completed', [AdminController::class, 'completedOrders'])->name('orders.completed');
+    Route::get('/orders/cancelled', [AdminController::class, 'cancelledOrders'])->name('orders.cancelled');
     Route::post('/orders/{order}/status', [AdminController::class, 'updateOrderStatus'])->name('orders.update-status');
     
     // Menu Items CRUD

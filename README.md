@@ -1,18 +1,19 @@
-# Japanese Restaurant Website
+# Washoku — Japanese Restaurant Website
 
-A modern Japanese restaurant web application built with Laravel 11. Features an online menu, bento builder, shopping cart, user authentication, and an admin panel for managing orders and menu items.
+A modern Japanese restaurant web application built with Laravel 11. Features an online menu, bento builder, shopping cart, user authentication, a **Washoku Food Advisor** chatbot for menu help and recommendations, and an admin panel for managing orders and menu items.
 
 ## Features
 
-- **Menu System** - Browse menu items by categories
+- **Menu System** - Browse menu items by categories (with calorie info per dish)
 - **Bento Builder** - Create custom bento boxes
 - **Shopping Cart** - Add items and manage your order
+- **Washoku Food Advisor** - Free rule-based chatbot for food recommendations, budget/calorie filters, and FAQ answers (hours, delivery, payment, etc.)
 - **User Authentication** - Register, login, and manage your account
 - **Customer Dashboard** - View order history
 - **Admin Panel** - Manage menu items and process orders
 - **Store Locator** - Find restaurant locations
 - **Contact Page** - Get in touch with the restaurant
-- **Responsive Design** - Built with Tailwind CSS
+- **Responsive Design** - Built with Tailwind CSS and Alpine.js
 
 ## Requirements
 
@@ -28,7 +29,7 @@ A modern Japanese restaurant web application built with Laravel 11. Features an 
 
 ```bash
 git clone <your-repository-url>
-cd japanese-restaurant
+cd -Washoku
 ```
 
 ### Step 2: Install PHP Dependencies
@@ -134,6 +135,12 @@ Then run migrations:
 php artisan migrate --seed
 ```
 
+To populate estimated calorie values for menu items (optional but recommended for the Food Advisor and menu cards):
+
+```bash
+php artisan db:seed --class=MenuItemCalorieSeeder
+```
+
 ---
 
 #### Option B: MySQL
@@ -176,6 +183,7 @@ DB_PASSWORD=your_password_here
 
 ```bash
 php artisan migrate --seed
+php artisan db:seed --class=MenuItemCalorieSeeder
 ```
 
 ---
@@ -217,10 +225,11 @@ The application will be available at: **http://localhost:8000**
 ## Project Structure
 
 ```
-japanese-restaurant/
+-Washoku/
 |-- app/
-|   |-- Http/Controllers/    # Application controllers
+|   |-- Http/Controllers/    # Application controllers (incl. FoodAdvisorController)
 |   |-- Models/              # Eloquent models
+|   |-- Services/            # FoodAdvisorService (chatbot recommendation engine)
 |-- database/
 |   |-- migrations/          # Database migrations
 |   |-- seeders/             # Database seeders
@@ -228,11 +237,13 @@ japanese-restaurant/
 |-- public/
 |   |-- images/              # Public images
 |-- resources/
-|   |-- css/                 # Stylesheets
+|   |-- css/                 # Stylesheets (incl. Food Advisor styles)
 |   |-- js/                  # JavaScript files
 |   |-- views/               # Blade templates
+|       |-- partials/food-advisor.blade.php  # Chat widget UI
 |-- routes/
 |   |-- web.php              # Web routes
+|   |-- api.php              # API routes (cart, checkout, food advisor)
 |-- storage/                 # Application storage
 ```
 
@@ -242,9 +253,52 @@ japanese-restaurant/
 |-------|-------------|
 | `users` | User accounts (customers & admins) |
 | `categories` | Menu categories |
-| `menu_items` | Menu items with prices |
+| `menu_items` | Menu items with prices and calories |
 | `orders` | Customer orders |
 | `order_items` | Items in each order |
+
+## Washoku Food Advisor (Chatbot)
+
+A **free, rule-based** food recommendation chatbot — no OpenAI, Gemini, or paid AI APIs.
+
+### What it does
+
+- Recommends dishes from your real menu based on category, budget, calories, dietary preferences, and spice level
+- Answers common questions (hours, delivery, payment, catering, menu overview)
+- Supports follow-up actions: **Something else**, **Lower price**, **Lower calories**
+- Skips irrelevant questions for drinks and desserts (no seafood/spice prompts)
+- Shows recommendation cards with price, calories, add-to-cart, and view links
+
+### Tech stack
+
+| Category | What we used | Purpose |
+|----------|--------------|---------|
+| **Backend** | PHP 8.2 + Laravel 11 | API route, controller, service layer |
+| **Recommendation engine** | Custom PHP (`FoodAdvisorService`) | Rule-based matching — keywords, regex, filters, scoring (no AI) |
+| **Database** | Eloquent ORM + MySQL/SQLite | Reads live `menu_items` (price, calories, category) |
+| **API** | Laravel JSON route + `fetch()` | `POST /api/food-advisor/recommend` |
+| **Frontend UI** | Alpine.js | Chat state, messages, quick replies, open/close |
+| **Templates** | Blade | `food-advisor.blade.php` widget markup |
+| **Styling** | Tailwind CSS + custom CSS | Chat bubbles, cards, chips in `app.css` |
+| **Build tool** | Vite | Bundles frontend assets |
+| **Auth (optional)** | Laravel session | Uses logged-in user for past-order hints |
+
+**Not used:** OpenAI, Gemini, Claude, BotMan, Livewire Chat, or any paid chatbot/AI SDK.
+
+### How it works
+
+| Layer | Technology |
+|-------|------------|
+| Backend engine | `app/Services/FoodAdvisorService.php` — keyword parsing, filters, scoring |
+| API | `POST /api/food-advisor/recommend` via `FoodAdvisorController` |
+| Frontend | Alpine.js chat widget in `resources/views/partials/food-advisor.blade.php` |
+| Data source | `menu_items` table (name, price, calories, category) |
+
+### Try it
+
+1. Start the app (`php artisan serve` + `npm run dev`)
+2. Open any page — click the **"Ask me!"** chat button (bottom-right)
+3. Use the wizard (category → budget → …) or type freely, e.g. `spicy ramen under 400`
 
 ## User Roles
 
@@ -266,6 +320,7 @@ japanese-restaurant/
 | `/stores` | Store locations |
 | `/contact` | Contact page |
 | `/faq` | FAQ page |
+| `POST /api/food-advisor/recommend` | Food Advisor chatbot API (JSON) |
 
 ## Common Commands
 
@@ -305,6 +360,19 @@ npm run dev
 - Make sure MySQL server is running
 - Check your `.env` file has correct credentials
 - Try `127.0.0.1` instead of `localhost` for DB_HOST
+
+### `npm` blocked in PowerShell (Windows)
+
+If you see a script execution policy error, either:
+
+```powershell
+cd -Washoku
+npm.cmd install
+```
+
+Or run `npm install` from **Command Prompt** instead of PowerShell.
+
+Always run `npm` commands from the project folder (`-Washoku`), not from `C:\WINDOWS\system32`.
 
 ### Permission errors (storage folder)
 ```bash

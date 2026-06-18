@@ -3,16 +3,215 @@
 @section('title', 'Build Your Bento Box - Washoku')
 
 @section('content')
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+    
+    @keyframes glow {
+        0%, 100% {
+            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.6);
+        }
+    }
+    
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px) rotate(-25deg);
+        }
+        50% {
+            transform: translateY(-10px) rotate(-25deg);
+        }
+    }
+    
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .animate-slide-in-left {
+        animation: slideInLeft 0.6s ease-out forwards;
+    }
+    
+    .animate-slide-in-right {
+        animation: slideInRight 0.6s ease-out forwards;
+    }
+    
+    .animate-scale-in {
+        animation: scaleIn 0.4s ease-out forwards;
+    }
+    
+    .animate-bounce-in {
+        animation: bounceIn 0.6s ease-out forwards;
+    }
+    
+    .animate-pulse-slow {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    .animate-glow {
+        animation: glow 2s ease-in-out infinite;
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-shimmer {
+        animation: shimmer 2s infinite;
+        background-size: 200% 100%;
+    }
+    
+    .item-enter {
+        animation: bounceIn 0.5s ease-out forwards;
+    }
+    
+    .progress-glow {
+        position: relative;
+    }
+    
+    .progress-glow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.4), transparent);
+        animation: shimmer 2s infinite;
+    }
+    
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: #f59e0b;
+        position: fixed;
+        animation: confetti-fall linear forwards;
+        z-index: 9999;
+    }
+    
+    @keyframes confetti-fall {
+        to {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+    
+    .stagger-item {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+    }
+    
+    .empty-slot-pulse {
+        animation: pulse 2s ease-in-out infinite;
+    }
+</style>
+
 <div class="min-h-screen bg-gradient-to-br from-[#f8f5f0] via-[#f5f1e8] to-[#ebe5d9] relative overflow-hidden" 
      x-data="bentoBuilder()"
      x-init="init()">
     
     <!-- Background Decorations -->
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-red-100/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-100/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-red-100/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse-slow"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-100/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse-slow" style="animation-delay: 1s;"></div>
     
     <!-- Page Header - Dark Theme -->
-    <div class="relative bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] py-12 overflow-hidden">
+    <div class="relative bg-gradient-to-br from-[#1a1a1a] via-[#2d1f1f] to-[#1a1a1a] py-12 overflow-hidden animate-fade-in">
         <div class="absolute inset-0 opacity-[0.05] seigaiha-pattern"></div>
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl"></div>
@@ -20,11 +219,11 @@
         <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
-            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3">Customize Your Meal</p>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-serif">
+            <p class="text-amber-400/80 text-sm font-medium tracking-widest uppercase mb-3 animate-fade-in-up" style="animation-delay: 0.1s;">Customize Your Meal</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 font-serif animate-fade-in-up" style="animation-delay: 0.2s;">
                 Build Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Bento</span>
             </h1>
-            <p class="text-white/60 text-lg">Select 1 main dish and 3 sides to complete your box</p>
+            <p class="text-white/60 text-lg animate-fade-in-up" style="animation-delay: 0.3s;">Select 1 main dish and 3 sides to complete your box</p>
         </div>
     </div>
 
@@ -36,8 +235,8 @@
                 <!-- Realistic Bento Box Container -->
                 <div class="relative flex items-start gap-6">
                     <!-- Chopsticks Decoration - Left side -->
-                    <div class="hidden md:flex flex-col items-center pt-8">
-                        <div class="flex gap-1.5 transform -rotate-[25deg]">
+                    <div class="hidden md:flex flex-col items-center pt-8 animate-slide-in-left" style="animation-delay: 0.4s;">
+                        <div class="flex gap-1.5 transform -rotate-[25deg] animate-float">
                             <div class="w-2 h-44 rounded-full shadow-lg" style="background: linear-gradient(to bottom, #E8D4B8 0%, #D4A574 10%, #8B5A2B 30%, #6B4423 70%, #4A3728 100%);"></div>
                             <div class="w-2 h-44 rounded-full shadow-lg" style="background: linear-gradient(to bottom, #E8D4B8 0%, #D4A574 10%, #8B5A2B 30%, #6B4423 70%, #4A3728 100%);"></div>
                         </div>
@@ -45,7 +244,7 @@
                     </div>
                     
                     <!-- Bento Box -->
-                    <div class="flex-1 relative">
+                    <div class="flex-1 relative animate-scale-in" style="animation-delay: 0.5s;">
                     <!-- Bento Box Outer Frame (Wood/Lacquer Style) -->
                     <div class="bg-gradient-to-br from-[#8B4513] via-[#A0522D] to-[#8B4513] p-3 rounded-2xl shadow-2xl">
                         <!-- Wood Grain Texture Overlay -->
@@ -69,10 +268,10 @@
                                         <button 
                                             x-on:click="openModal('main', 0)"
                                             class="absolute top-0 left-0 w-[calc(50%-3px)] h-[calc(100%-93px)] overflow-hidden transition-all group"
-                                            :class="bentoBox[0] ? '' : 'hover:bg-white/5'">
+                                            :class="bentoBox[0] ? '' : 'hover:bg-white/5 hover:scale-[1.02]'">
                                             
                                             <template x-if="bentoBox[0]">
-                                                <div class="absolute inset-0">
+                                                <div class="absolute inset-0 item-enter">
                                                     <img :src="bentoBox[0]?.image || 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'" 
                                                          :alt="bentoBox[0]?.name || ''"
                                                          class="w-full h-full object-cover"
@@ -93,8 +292,8 @@
                                             
                                             <template x-if="!bentoBox[0]">
                                                 <div class="h-full flex flex-col items-center justify-center p-4 text-center">
-                                                    <div class="w-16 h-16 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-3 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
-                                                        <svg class="w-8 h-8 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <div class="w-16 h-16 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-3 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all empty-slot-pulse group-hover:scale-110">
+                                                        <svg class="w-8 h-8 text-amber-600/60 group-hover:text-amber-500 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
@@ -108,10 +307,10 @@
                                         <button 
                                             x-on:click="openModal('side', 1)"
                                             class="absolute top-0 right-0 w-[calc(50%-3px)] h-[calc(50%-48px)] overflow-hidden transition-all group"
-                                            :class="bentoBox[1] ? '' : 'hover:bg-white/5'">
+                                            :class="bentoBox[1] ? '' : 'hover:bg-white/5 hover:scale-[1.02]'">
                                             
                                             <template x-if="bentoBox[1]">
-                                                <div class="absolute inset-0">
+                                                <div class="absolute inset-0 item-enter">
                                                     <img :src="bentoBox[1].image || 'https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Food'" 
                                                          :alt="bentoBox[1].name"
                                                          class="w-full h-full object-cover"
@@ -131,8 +330,8 @@
                                             
                                             <template x-if="!bentoBox[1]">
                                                 <div class="h-full flex flex-col items-center justify-center p-2">
-                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
-                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all empty-slot-pulse group-hover:scale-110">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
@@ -146,10 +345,10 @@
                                             x-on:click="openModal('side', 2)"
                                             class="absolute right-0 w-[calc(50%-3px)] h-[calc(50%-48px)] overflow-hidden transition-all group"
                                             style="top: calc(50% - 45px);"
-                                            :class="bentoBox[2] ? '' : 'hover:bg-white/5'">
+                                            :class="bentoBox[2] ? '' : 'hover:bg-white/5 hover:scale-[1.02]'">
                                             
                                             <template x-if="bentoBox[2]">
-                                                <div class="absolute inset-0">
+                                                <div class="absolute inset-0 item-enter">
                                                     <img :src="bentoBox[2].image || 'https://via.placeholder.com/300x200/f3f4f6/9ca3af?text=Food'" 
                                                          :alt="bentoBox[2].name"
                                                          class="w-full h-full object-cover"
@@ -169,8 +368,8 @@
                                             
                                             <template x-if="!bentoBox[2]">
                                                 <div class="h-full flex flex-col items-center justify-center p-2">
-                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
-                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all empty-slot-pulse group-hover:scale-110">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
@@ -183,10 +382,10 @@
                                         <button 
                                             x-on:click="openModal('side', 3)"
                                             class="absolute bottom-0 left-0 right-0 h-[87px] overflow-hidden transition-all group"
-                                            :class="bentoBox[3] ? '' : 'hover:bg-white/5'">
+                                            :class="bentoBox[3] ? '' : 'hover:bg-white/5 hover:scale-[1.01]'">
                                             
                                             <template x-if="bentoBox[3]">
-                                                <div class="absolute inset-0">
+                                                <div class="absolute inset-0 item-enter">
                                                     <img :src="bentoBox[3].image || 'https://via.placeholder.com/500x150/f3f4f6/9ca3af?text=Food'" 
                                                          :alt="bentoBox[3].name"
                                                          class="w-full h-full object-cover"
@@ -206,8 +405,8 @@
                                             
                                             <template x-if="!bentoBox[3]">
                                                 <div class="h-full flex items-center justify-center gap-3 p-3">
-                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all">
-                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <div class="w-10 h-10 border-2 border-dashed border-amber-600/40 rounded-full flex items-center justify-center group-hover:border-amber-500 group-hover:bg-amber-500/10 transition-all empty-slot-pulse group-hover:scale-110">
+                                                        <svg class="w-5 h-5 text-amber-600/60 group-hover:text-amber-500 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                                                         </svg>
                                                     </div>
@@ -226,7 +425,7 @@
             </div>
 
             <!-- Right Column: Order Summary -->
-            <div class="lg:col-span-1">
+            <div class="lg:col-span-1 animate-slide-in-right" style="animation-delay: 0.6s;">
                 <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden sticky top-24">
                     <div class="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-100">
                         <h3 class="text-xl font-bold text-gray-800">Your Order</h3>
@@ -237,11 +436,17 @@
                         <div class="mb-5">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-sm font-medium text-gray-600">Bento Progress</span>
-                                <span class="text-sm font-bold text-red-600" x-text="filledSlots + '/4'"></span>
+                                <span class="text-sm font-bold text-red-600 transition-all duration-300" 
+                                      :class="filledSlots === 4 ? 'scale-110' : ''"
+                                      x-text="filledSlots + '/4'"></span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                                <div class="bg-gradient-to-r from-red-500 to-red-600 h-full rounded-full transition-all duration-500" 
-                                     :style="'width: ' + (filledSlots / 4 * 100) + '%'"></div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden progress-glow">
+                                <div class="bg-gradient-to-r from-red-500 to-red-600 h-full rounded-full transition-all duration-500 relative overflow-hidden" 
+                                     :class="filledSlots === 4 ? 'animate-glow' : ''"
+                                     :style="'width: ' + (filledSlots / 4 * 100) + '%'">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" 
+                                         x-show="filledSlots > 0"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -261,7 +466,14 @@
 
                             <div class="space-y-2">
                                 <template x-for="(item, index) in bentoBox" :key="index">
-                                    <div x-show="item" class="flex items-center gap-2 p-2 bg-white rounded-lg border border-gray-100">
+                                    <div x-show="item" 
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 transform translate-x-4"
+                                         x-transition:enter-end="opacity-100 transform translate-x-0"
+                                         x-transition:leave="transition ease-in duration-200"
+                                         x-transition:leave-start="opacity-100 transform translate-x-0"
+                                         x-transition:leave-end="opacity-0 transform -translate-x-4"
+                                         class="flex items-center gap-2 p-2 bg-white rounded-lg border border-gray-100 hover:shadow-md transition-all">
                                         <img :src="item?.image || 'https://via.placeholder.com/40x40/f3f4f6/9ca3af?text=Food'" 
                                              :alt="item?.name"
                                              class="w-10 h-10 object-cover rounded-lg"
@@ -298,15 +510,23 @@
                         <button 
                             x-on:click="completeOrder"
                             :disabled="filledSlots < 4"
-                            :class="filledSlots < 4 ? 'opacity-50 cursor-not-allowed bg-gray-400' : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 hover:scale-[1.02]'"
-                            class="w-full text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-lg">
+                            :class="filledSlots < 4 ? 'opacity-50 cursor-not-allowed bg-gray-400' : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 hover:scale-[1.02] animate-pulse-slow'"
+                            class="w-full text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-lg"
+                            x-show="filledSlots >= 4"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100">
                             <span x-show="filledSlots >= 4" class="flex items-center justify-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                                 Add to Cart
                             </span>
-                            <span x-show="filledSlots < 4" class="flex items-center justify-center gap-2">
+                            <span x-show="filledSlots < 4" 
+                                  x-transition:enter="transition ease-out duration-300"
+                                  x-transition:enter-start="opacity-0"
+                                  x-transition:enter-end="opacity-100"
+                                  class="flex items-center justify-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                 </svg>
@@ -362,11 +582,13 @@
             <!-- Modal Body -->
             <div class="p-6 overflow-y-auto max-h-[calc(85vh-120px)] bg-gradient-to-br from-[#f8f5f0] to-[#f5f1e8]">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <template x-for="item in modalItems" :key="item.id">
+                    <template x-for="(item, index) in modalItems" :key="item.id">
                         <button 
                             type="button"
                             x-on:click.stop="selectItem(item)"
-                            class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden transition-all hover:border-red-500 hover:shadow-xl group text-left cursor-pointer">
+                            x-init="setTimeout(() => { $el.style.opacity = '1'; $el.style.animation = 'fadeInUp 0.4s ease-out forwards'; $el.style.animationDelay = (index * 0.05) + 's'; }, 10)"
+                            style="opacity: 0;"
+                            class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden transition-all hover:border-red-500 hover:shadow-xl group text-left cursor-pointer hover:scale-105">
                             
                             <div class="aspect-square overflow-hidden bg-gray-100 relative">
                                 <img :src="(item.image || item.image_url || 'https://placehold.co/400x400/f3f4f6/9ca3af?text=' + encodeURIComponent(item.name))" 
@@ -410,6 +632,17 @@ function bentoBuilder() {
         
         init() {
             console.log('Bento Builder initialized');
+            // Add stagger animation to modal items
+            this.$watch('modalItems', () => {
+                if (this.modalItems.length > 0) {
+                    setTimeout(() => {
+                        const items = document.querySelectorAll('[x-for*="modalItems"]');
+                        items.forEach((item, index) => {
+                            item.style.setProperty('--i', index);
+                        });
+                    }, 100);
+                }
+            });
         },
         
         get filledSlots() {
@@ -457,8 +690,46 @@ function bentoBuilder() {
                 type: item.type || 'main'
             };
             
-            this.bentoBox[this.currentSlot] = newItem;
+            // Trigger animation by temporarily clearing and setting
+            const oldValue = this.bentoBox[this.currentSlot];
+            this.bentoBox[this.currentSlot] = null;
+            
+            setTimeout(() => {
+                this.bentoBox[this.currentSlot] = newItem;
+                
+                // Check if all slots are filled for celebration
+                if (this.filledSlots === 4) {
+                    setTimeout(() => {
+                        this.celebrateCompletion();
+                    }, 500);
+                }
+            }, 50);
+            
             this.closeModal();
+        },
+        
+        celebrateCompletion() {
+            // Create confetti effect
+            const colors = ['#f59e0b', '#ef4444', '#10b981', '#3b82f6', '#8b5cf6'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                    confetti.style.height = (Math.random() * 8 + 6) + 'px';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 4000);
+                }, i * 20);
+            }
         },
         
         removeItem(slot) {
@@ -474,6 +745,9 @@ function bentoBuilder() {
                 alert('Please fill all 4 bento compartments before adding to cart.');
                 return;
             }
+            
+            // Celebration animation
+            this.celebrateCompletion();
             
             const bentoName = 'Custom Bento Box';
             const bentoItems = this.bentoBox.filter(item => item !== null).map(item => item.name).join(', ');
@@ -506,7 +780,10 @@ function bentoBuilder() {
                         image: this.bentoBox[0]?.image || 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Bento',
                         quantity: 1
                     });
-                    this.bentoBox = [null, null, null, null];
+                    // Animate clearing the box
+                    setTimeout(() => {
+                        this.bentoBox = [null, null, null, null];
+                    }, 300);
                     // Toast is shown by cart store's add function
                 } else {
                     const authCheck = document.querySelector('meta[name="auth-check"]')?.content;
@@ -522,7 +799,10 @@ function bentoBuilder() {
                     });
                     existingCart.count = existingCart.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
                     localStorage.setItem(cartKey, JSON.stringify(existingCart));
-                    this.bentoBox = [null, null, null, null];
+                    // Animate clearing the box
+                    setTimeout(() => {
+                        this.bentoBox = [null, null, null, null];
+                    }, 300);
                     window.dispatchEvent(new CustomEvent('cart-updated'));
                     // Show toast notification
                     window.dispatchEvent(new CustomEvent('show-toast', {
