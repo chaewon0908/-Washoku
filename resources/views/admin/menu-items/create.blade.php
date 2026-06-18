@@ -79,6 +79,14 @@
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none transition-all">
                     </div>
 
+                    <!-- Calories -->
+                    <div>
+                        <label for="calories" class="block text-sm font-semibold text-gray-700 mb-2">Calories (kcal)</label>
+                        <input type="number" id="calories" name="calories" value="{{ old('calories') }}" min="0" max="5000"
+                            placeholder="e.g. 520"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none transition-all">
+                    </div>
+
                     <!-- Category -->
                     <div>
                         <label for="category_id" class="block text-sm font-semibold text-gray-700 mb-2">Category *</label>

@@ -11,6 +11,7 @@ class MenuItem extends Model
         'slug',
         'description',
         'price',
+        'calories',
         'image',
         'image_url',
         'type',

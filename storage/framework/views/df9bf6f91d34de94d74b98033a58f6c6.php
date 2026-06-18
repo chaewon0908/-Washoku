@@ -130,6 +130,7 @@
                             'name' => $item->name,
                             'description' => $item->description,
                             'price' => $item->price,
+                            'calories' => $item->calories,
                             'image' => $item->image_url ?? ($item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food'),
                             'is_featured' => $item->is_featured ?? false,
                             'is_bestseller' => $item->is_bestseller ?? false,
@@ -172,7 +173,13 @@
                         <div class="p-5">
                             <h3 class="text-lg font-bold text-gray-800 group-hover:text-red-600 mb-2 transition-colors line-clamp-1"><?php echo e($item->name); ?></h3>
                             <?php if($item->description): ?>
-                                <p class="text-gray-500 text-sm mb-4 line-clamp-2"><?php echo e(\Illuminate\Support\Str::limit($item->description, 60)); ?></p>
+                                <p class="text-gray-500 text-sm mb-2 line-clamp-2"><?php echo e(\Illuminate\Support\Str::limit($item->description, 60)); ?></p>
+                            <?php endif; ?>
+                            <?php if($item->calories): ?>
+                                <p class="text-xs text-amber-700 font-semibold mb-3 flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+                                    <?php echo e(number_format($item->calories)); ?> kcal
+                                </p>
                             <?php endif; ?>
                             <div class="flex items-center justify-between">
                                 <span class="text-2xl font-bold text-red-600">₱<?php echo e(number_format($item->price, 0)); ?></span>
@@ -268,9 +275,12 @@
                 <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4" x-text="selectedItem?.name"></h2>
                 
                 <!-- Price -->
-                <div class="flex items-center gap-3 mb-6">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
                     <span class="text-3xl font-bold text-red-600" x-text="'₱' + (selectedItem?.price ? Number(selectedItem.price).toFixed(0) : '0')"></span>
                     <span class="text-gray-400 text-sm bg-gray-100 px-3 py-1 rounded-full">per serving</span>
+                    <template x-if="selectedItem?.calories">
+                        <span class="text-amber-700 text-sm font-semibold bg-amber-50 border border-amber-200 px-3 py-1 rounded-full" x-text="Number(selectedItem.calories).toLocaleString() + ' kcal'"></span>
+                    </template>
                 </div>
                 
                 <!-- Description -->
@@ -321,6 +331,7 @@ $menuItemsJson = $items->map(function($item) {
         'name' => $item->name,
         'description' => $item->description,
         'price' => $item->price,
+        'calories' => $item->calories,
         'image' => $item->image_url ?? $item->image ?? 'https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=Food',
         'is_featured' => $item->is_featured ?? false,
         'is_bestseller' => $item->is_bestseller ?? false,

@@ -390,6 +390,148 @@ p, span, div, h1, h2, h3, h4, h5, h6, a, button, input, textarea, select, label,
 }
 
 /* ============================================
+   FOOD ADVISOR CHAT WIDGET
+   ============================================ */
+
+.food-advisor-root {
+    @apply fixed bottom-6 left-6 z-[90];
+}
+
+.food-advisor-toggle {
+    @apply relative w-16 h-16 rounded-full;
+    @apply bg-gradient-to-br from-red-700 to-red-800;
+    @apply shadow-xl shadow-red-900/40;
+    @apply flex items-center justify-center;
+    @apply border-2 border-red-500/30;
+    @apply hover:from-red-600 hover:to-red-700 hover:scale-105;
+    @apply transition-all duration-300;
+}
+
+.food-advisor-toggle-active {
+    @apply scale-95;
+}
+
+.food-advisor-badge {
+    @apply absolute -top-1 -right-1;
+    @apply bg-amber-400 text-red-900 text-[10px] font-bold;
+    @apply px-2 py-0.5 rounded-full shadow-md;
+    @apply whitespace-nowrap;
+}
+
+.food-advisor-panel {
+    @apply absolute bottom-20 left-0;
+    @apply w-[min(100vw-3rem,380px)] h-[min(70vh,560px)];
+    @apply bg-white rounded-2xl shadow-2xl;
+    @apply border border-red-100 overflow-hidden;
+    @apply flex flex-col;
+}
+
+.food-advisor-header {
+    @apply flex items-center justify-between;
+    @apply bg-gradient-to-r from-red-700 to-red-800;
+    @apply px-4 py-3 shrink-0;
+}
+
+.food-advisor-avatar {
+    @apply w-10 h-10 rounded-full;
+    @apply bg-white/20 flex items-center justify-center;
+    @apply border border-white/30;
+}
+
+.food-advisor-messages {
+    @apply flex-1 overflow-y-auto p-4 space-y-3;
+    @apply bg-gradient-to-b from-warm-cream to-white;
+}
+
+.food-advisor-bubble-bot {
+    @apply max-w-[92%] bg-white rounded-2xl rounded-tl-sm;
+    @apply px-4 py-3 shadow-md border border-gray-100;
+}
+
+.food-advisor-bubble-user {
+    @apply max-w-[85%] bg-gradient-to-r from-red-600 to-red-700;
+    @apply text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-md;
+}
+
+.food-advisor-card {
+    @apply flex gap-3 bg-gray-50 rounded-xl p-2.5 border border-gray-100;
+}
+
+.food-advisor-card-image {
+    @apply w-16 h-16 rounded-lg object-cover shrink-0;
+}
+
+.food-advisor-btn-primary {
+    @apply text-xs font-bold text-white;
+    @apply bg-red-600 hover:bg-red-700;
+    @apply px-3 py-1.5 rounded-lg transition-colors;
+}
+
+.food-advisor-btn-secondary {
+    @apply text-xs font-semibold text-red-700;
+    @apply bg-red-50 hover:bg-red-100;
+    @apply px-3 py-1.5 rounded-lg transition-colors;
+}
+
+.food-advisor-quick-replies {
+    @apply flex flex-wrap gap-2 px-4 py-2;
+    @apply border-t border-gray-100 bg-white shrink-0;
+}
+
+.food-advisor-chip {
+    @apply text-xs font-semibold text-red-800;
+    @apply bg-red-50 hover:bg-red-100 border border-red-200;
+    @apply px-3 py-1.5 rounded-full transition-colors;
+}
+
+.food-advisor-input-bar {
+    @apply flex gap-2 p-3 border-t border-gray-100 bg-white shrink-0;
+}
+
+.food-advisor-input {
+    @apply flex-1 text-sm px-4 py-2.5 rounded-xl;
+    @apply border border-gray-200 bg-gray-50;
+    @apply focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-300;
+    @apply disabled:opacity-50;
+}
+
+.food-advisor-send {
+    @apply w-11 h-11 rounded-xl shrink-0;
+    @apply bg-gradient-to-r from-red-600 to-red-700 text-white;
+    @apply flex items-center justify-center;
+    @apply hover:from-red-500 hover:to-red-600 transition-all;
+    @apply disabled:opacity-40 disabled:cursor-not-allowed;
+}
+
+.food-advisor-dot {
+    @apply w-2 h-2 rounded-full bg-red-400;
+    animation: food-advisor-bounce 1.2s infinite ease-in-out;
+}
+
+.food-advisor-dot.animation-delay-150 {
+    animation-delay: 0.15s;
+}
+
+.food-advisor-dot.animation-delay-300 {
+    animation-delay: 0.3s;
+}
+
+@keyframes food-advisor-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+    40% { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (max-width: 640px) {
+    .food-advisor-root {
+        @apply bottom-4 left-4;
+    }
+
+    .food-advisor-panel {
+        @apply w-[calc(100vw-2rem)] h-[min(75vh,520px)];
+    }
+}
+
+/* ============================================
    JAPANESE WAVE SECTION DIVIDER
    ============================================ */
 

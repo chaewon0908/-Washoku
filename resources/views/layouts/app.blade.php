@@ -28,6 +28,8 @@
     </main>
     
     @include('partials.footer')
+
+    @include('partials.food-advisor')
     
     <!-- Back to Top Button -->
     <button 
